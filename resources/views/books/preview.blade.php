@@ -24,13 +24,12 @@
   </div>
 @endforeach
 </div>
+</div>
+<dev id="app">
+  <bookCard></bookCard>
+</dev>
 
-</div>
-<div id="app">
-<hello></hello>
-</div>
-  <chat-room>
-  </chat-room>
+  
 <div>
 	@include('workshops.schedule')
 </div>

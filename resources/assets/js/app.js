@@ -16,6 +16,10 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+// Vue.component('bookCard',require('./components/BookCard.vue'));
+Vue.component('bookCard',{
+	template:'<h1>this is a test</h1>'
+})
 
 const app = new Vue({
     el: '#app'

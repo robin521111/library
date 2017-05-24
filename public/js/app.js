@@ -786,6 +786,10 @@ window.Vue = __webpack_require__(37);
  */
 
 Vue.component('example', __webpack_require__(34));
+// Vue.component('bookCard',require('./components/BookCard.vue'));
+Vue.component('bookCard', {
+  template: '<h1>this is a test</h1>'
+});
 
 var app = new Vue({
   el: '#app'

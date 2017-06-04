@@ -14,13 +14,23 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.component('Example',require('./components/Example.vue'));
 
-Vue.component('example', require('./components/Example.vue'));
-// Vue.component('bookCard',require('./components/BookCard.vue'));
-Vue.component('bookCard',{
-	template:'<h1>this is a test</h1>'
+
+Vue.component('bookcard',require('./components/BookCard.vue'));
+
+new Vue({
+	el:'#BookCard',
+	props:['message']
 })
 
-const app = new Vue({
-    el: '#app'
-});
+new Vue({
+	el:'#app1'
+})
+
+
+
+
+
+
+

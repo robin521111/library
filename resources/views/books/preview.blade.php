@@ -11,7 +11,14 @@
     <div class="thumbnail">
       <img data-src="holder.js/300x300" alt="...">
       <div class="caption">
-        <h3> {{$book->title}}   </h3>
+       <div id="BookCard">
+
+       <bookcard message="this is quick props" card="{{!! $book->title !!}}"></bookcard>
+       </div>
+
+
+        <h3> {{$book->title}} </h3>
+
         <p> <span class="label label-primary"> {{$book->tech_field}} </span></p>     
    <p><button type="button" class="btn btn-success">Purchase</button></p>
 @if (Auth::user())
@@ -20,20 +27,18 @@
         </p>
 @endif
       </div>
+       
     </div>
   </div>
 @endforeach
 </div>
 </div>
-<dev id="app">
-  <bookCard></bookCard>
-</dev>
-
-  
+<div id="app1">
+  <Example></Example>
+</div>
 <div>
 	@include('workshops.schedule')
 </div>
-
 <script type="text/javascript">
 new Vue({
   el: '#Workshop_item',

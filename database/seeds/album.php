@@ -11,7 +11,7 @@ class album extends Seeder
      */
     public function run()
     {
-              DB::table('album')->insert([
+            DB::table('album')->insert([
             'imgs' => str_random(20),
             'commentid' => str_random(20),
             'title' =>str_random(20),

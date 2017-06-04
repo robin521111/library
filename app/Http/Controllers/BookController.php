@@ -21,6 +21,10 @@ class BookController extends Controller
         return view('books.preview',['books'=>$books['preview']],['data'=>$books['data']]);
     }
 
+    public function getBookJson()
+    {
+        return BookModel::all() ->toJson();
+    }
 
 
 

@@ -6,7 +6,11 @@
                     <div class="panel-heading">Example Component</div>
 
                     <div class="panel-body">
-                        I'm an example component!
+                        this is fast testing ~!! {{card}}
+
+                        <br>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -17,7 +21,9 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+       console.log('Component be mounted!')
+        },
+        props:['message','card']
         }
-    }
+    
 </script>

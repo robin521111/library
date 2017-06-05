@@ -7,35 +7,33 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 <div class="row">
 @foreach($books as $book)
-  <div class="col-sm-6 col-md-4">
+  {{-- <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <img data-src="holder.js/300x300" alt="...">
       <div class="caption">
-       <div id="BookCard">
+   --}}     <div id="BookCard">
 
-       <bookcard message="this is quick props" card="{{!! $book->title !!}}"></bookcard>
+       <bookcard :books={{ json_encode($books)}} auth="Auth::user()"></bookcard>
        </div>
 
 
-        <h3> {{$book->title}} </h3>
+{{--         <h3> {{$book->title}} </h3>
 
         <p> <span class="label label-primary"> {{$book->tech_field}} </span></p>     
-   <p><button type="button" class="btn btn-success">Purchase</button></p>
-@if (Auth::user())
+   <p><button type="button" class="btn btn-success">Purchase</button></p>--}}
+{{-- @if (Auth::user())
         <p><a href=" {{action('BookController@edit',['id'=>$book->id]) }} " class="btn btn-info" role="button">Edit</a>
 <a href=" {{action('BookController@delete',['id'=>$book->id]) }} " class="btn btn-info" role="button">Delete</a>
         </p>
-@endif
+@endif --}}
       </div>
        
     </div>
-  </div>
+  </div> 
 @endforeach
 </div>
 </div>
-<div id="app1">
-  <Example></Example>
-</div>
+
 <div>
 	@include('workshops.schedule')
 </div>

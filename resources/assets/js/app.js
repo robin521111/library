@@ -14,18 +14,12 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-Vue.component('Example',require('./components/Example.vue'));
 
 
 Vue.component('bookcard',require('./components/BookCard.vue'));
 
 new Vue({
-	el:'#BookCard',
-	props:['message']
-})
-
-new Vue({
-	el:'#app1'
+	el:'#BookCard'
 })
 
 

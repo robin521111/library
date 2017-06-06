@@ -7,12 +7,11 @@
        <div id="BookCard">
        </div>
         <h3>{{book.title}}</h3>
-
         <p> <span class="label label-primary"> </span></p>     
    <p><button type="button" class="btn btn-success">Purchase</button></p>
    <div v-if="auth">
-       <p><a href=" " class="btn btn-info" role="button">Edit</a>
-<a href=" " class="btn btn-info" role="button">Delete</a>
+       <p><a :href="'books/edit/'+  book.id" class="btn btn-info" role="button">Edit</a>
+<a :href="'books/delete/'+  book.id " class="btn btn-info" role="button">Delete</a>
         </p>
    </div>
    </div>

@@ -6,37 +6,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.5/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 <div class="row">
+
 @foreach($books as $book)
-  {{-- <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x300" alt="...">
-      <div class="caption">
-   --}}     <div id="BookCard">
-
-       <bookcard :books={{ json_encode($books)}} auth="Auth::user()"></bookcard>
-       </div>
-
-
-{{--         <h3> {{$book->title}} </h3>
-
-        <p> <span class="label label-primary"> {{$book->tech_field}} </span></p>     
-   <p><button type="button" class="btn btn-success">Purchase</button></p>--}}
-{{-- @if (Auth::user())
-        <p><a href=" {{action('BookController@edit',['id'=>$book->id]) }} " class="btn btn-info" role="button">Edit</a>
-<a href=" {{action('BookController@delete',['id'=>$book->id]) }} " class="btn btn-info" role="button">Delete</a>
-        </p>
-@endif --}}
-      </div>
-       
-    </div>
-  </div> 
+   <div id="BookCard">
+       <bookcard v-bind:books="{{json_encode($books)}}" auth="{{Auth::user()}}"></bookcard>
+</div>
 @endforeach
-</div>
-</div>
 
-<div>
 	@include('workshops.schedule')
 </div>
+
 <script type="text/javascript">
 new Vue({
   el: '#Workshop_item',

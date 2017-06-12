@@ -1667,6 +1667,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -1676,8 +1686,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: {
         books: Array,
         auth: Object
-
+    },
+    data: function data() {
+        var progress = books['progress'];
     }
+
 });
 
 /***/ }),
@@ -31789,7 +31802,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "href": 'books/delete/' + book.id,
         "role": "button"
       }
-    }, [_vm._v("Delete")])])]) : _vm._e()])])])
+    }, [_vm._v("Delete")])])]) : _vm._e(), _vm._v(" "), _c('p', [_c('span', {
+      staticClass: "label label-primary"
+    }, [_vm._v(" " + _vm._s(book.tech_field) + " ")])]), _vm._v(" "), _c('p', [_c('span', {
+      staticClass: "label label-primary"
+    }, [_vm._v(" " + _vm._s(book.progress) + " ")])]), _vm._v(" "), _c('div', {
+      staticClass: "progress"
+    }, [_c('div', {
+      staticClass: "progress-bar progress-bar-striped active",
+      staticStyle: {
+        "width": "45%"
+      },
+      attrs: {
+        "role": "progressbar",
+        "aria-valuenow": "45",
+        "aria-valuemin": "0",
+        "aria-valuemax": "100"
+      }
+    }, [_vm._v("\r\n  " + _vm._s(book.progress) + "\r\n  ")])])])])])
   }))
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_c('span', {

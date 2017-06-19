@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Library') }}</title>
+    <title>{{ config('app.name', 'library') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -90,9 +90,5 @@
         @yield('content')
     </div>
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
-    {{-- <script src="../../assets/js/app.js"></script> --}}
-    <script src="/js/vue.js"></script>
 </body>
 </html>

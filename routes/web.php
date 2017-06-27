@@ -27,3 +27,5 @@ Route::get('form','TestController@form');
 Route::post('form/validate','TestController@validate');
 Route::get('api/book/getJson','BookController@getBookJson' );
 Route::get('/books/borrow', 'BookController@borrowBook');
+Route::get('/testPage', 'HomeController@testPage');
+

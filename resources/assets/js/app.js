@@ -6,33 +6,50 @@
  */
  
 require('./bootstrap');
-Window.Vue = Vue;
 
+window.Vue = require('vue');
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
 Vue.component('bookcard',require('./components/BookCard.vue'));
 //Vue.component('borrowcard',require('./components/BorrowCard.vue'));
 
 new Vue({
-	el:'#BookCard'
-});
+  el:'#BookCard',
+  props:{
+    books:Array, 
+    auth: String
+  }
+})
 
-
-
-var vm= new Vue({
-	el:'#BorrowCard',
-  components:{
-    template: require('./components/BorrowCard.vue')
-  },
+Vue.component('demo-grid', {
+  template: '#grid-template',
   props: {
     data: Array,
     columns: Array,
     filterKey: String
-  },  
+  },
+  // computed:{
+  //   textFilter:function () {
+  //     filterKey.toLowerCase();
+  //   }
+  // },
+  filters:{
+    seqence:function (att,value) {
+
+      //return value.toLowerCase();
+       // var self = this;
+        return att.filter(function (entry) {
+          return entry.indexOf(value) !==-1
+        })
+    }
+    
+    
+   },
   // 页面加载就执行
   data: function () { 
     var sortOrders = {}; //定义sortOrders为空字典
@@ -46,7 +63,7 @@ var vm= new Vue({
       sortOrders: sortOrders
     };
   },
-    methods: {
+  methods: {
     //sortBy[key]理解: 当click时执行该函数,sortBy为一个函数方法,接受key参数
     sortBy: function (key) {
       //并将参数赋值给内部变量
@@ -57,22 +74,20 @@ var vm= new Vue({
       console.log(this.sortOrders[key]); // -1
     }
   }
-
 });
 
-var table = new Vue({
-	el:'#TableCard',
-	data:{
-		searchQuery:'',
-		gridColumns:['name','power'],
-		gridData:[
-		{name:'Bruce Lee',power:9000},
-		{name:'Jackie Chen',power:7000},
-		{name:'Jet Li',power:8000},
-		]
+var demo = new Vue({
+  el: '#bookborrow',
+  data: {
+    searchQuery: '',
+    gridColumns: ['name', 'power'],
+    gridData: [
+      { name: 'Bruce Lee', power: 9000 },
+      { name: 'Jackie Chan', power: 7000 },
+      { name: 'Jet Li', power: 8000 },
+    ]
 
-	}
+  }
 });
-
 
 

@@ -21,6 +21,7 @@ class CreateBooksTb extends Migration
                 $table ->string('title');
                 $table ->string('tech_field');
                 $table ->integer('status');
+                $table ->integer('progress');
                 $table->timestamp('created_at')->nullable();
             });
    

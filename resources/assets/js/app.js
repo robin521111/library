@@ -27,7 +27,6 @@ new Vue({
 })
 
 Vue.component('demo-grid', {
-  template: '#grid-template',
   props: {
     data: Array,
     columns: Array,
@@ -38,18 +37,6 @@ Vue.component('demo-grid', {
   //     filterKey.toLowerCase();
   //   }
   // },
-  filters:{
-    seqence:function (att,value) {
-
-      //return value.toLowerCase();
-       // var self = this;
-        return att.filter(function (entry) {
-          return entry.indexOf(value) !==-1
-        })
-    }
-    
-    
-   },
   // 页面加载就执行
   data: function () { 
     var sortOrders = {}; //定义sortOrders为空字典
@@ -89,5 +76,10 @@ var demo = new Vue({
 
   }
 });
+
+new Vue({
+  el:'#app'
+
+})
 
 

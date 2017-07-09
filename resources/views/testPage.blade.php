@@ -3,18 +3,10 @@
   
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="coaster content management system, a beacon enabled laravel cms with physical web integration. coaster is easy to use and extremely flexible.">
-    <meta name="keywords" content="coaster, cms, laravel cms, content management system, easy to use, flexible, physical web, agencies, developers, beacon enabled">
-    <meta property="og:title" content="coaster cms - beacon enabled, laravel content management system">
-    <meta property="og:description" content="coaster content management system, a beacon enabled laravel cms with physical web integration. coaster is easy to use and extremely flexible.">
-    <meta itemprop="name" content="coaster cms - beacon enabled, laravel content management system">
-    <meta itemprop="description" content="coaster content management system, a beacon enabled laravel cms with physical web integration. coaster is easy to use and extremely flexible.">
-    <meta name="google-site-verification" content="3jltmc8ld8xfzhuxygvrhgiy5srd5chgfym1hbpnrpi">
+
     <link href="//fonts.googleapis.com/css?family=raleway:300,400,600,700,900"
     rel="stylesheet">
-    <link href="https://www.coastercms.org/themes/coaster/css/all.css" rel="stylesheet">
+    <link href="../../public/css/app.css" rel="stylesheet">
     <link rel="icon" href="/favicon.png">
     
     <!--[if lt ie 9]>
@@ -34,8 +26,7 @@
         </a>
         <p>
           our slack community is open! fill in
-          <a class="typeform-share link" href="https://coaster.typeform.com/to/v9vmqa"
-          data-mode="2" target="_blank">
+          <a class="typeform-share link" href="" data-mode="2" target="_blank">
             this
           </a>
           form for an invite.

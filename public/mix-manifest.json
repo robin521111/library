@@ -4,5 +4,6 @@
   "/js/vue.js": "/js/vue.js",
   "/js/vendor.js": "/js/vendor.js",
   "/js/manifest.js": "/js/manifest.js",
-  "/js/chart.js": "/js/chart.js"
+  "/js/chart.js": "/js/chart.js",
+  "/css/all.js": "/css/all.js"
 }

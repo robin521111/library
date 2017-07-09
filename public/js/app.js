@@ -796,7 +796,6 @@ new Vue({
 });
 
 Vue.component('demo-grid', {
-  template: '#grid-template',
   props: {
     data: Array,
     columns: Array,
@@ -807,17 +806,6 @@ Vue.component('demo-grid', {
   //     filterKey.toLowerCase();
   //   }
   // },
-  filters: {
-    seqence: function seqence(att, value) {
-
-      //return value.toLowerCase();
-      // var self = this;
-      return att.filter(function (entry) {
-        return entry.indexOf(value) !== -1;
-      });
-    }
-
-  },
   // 页面加载就执行
   data: function data() {
     var sortOrders = {}; //定义sortOrders为空字典
@@ -31850,7 +31838,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "id": "BookCard"
       }
-    }), _vm._v(" "), _c('h3', [_vm._v(_vm._s(book.title) + " ")]), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(0, true), _vm._v(" "), _vm._m(1, true), _vm._v(" "), (_vm.auth) ? _c('div', [_c('p', [_c('a', {
+    }), _vm._v(" "), _c('h3', [_vm._v(_vm._s(book.title) + " ")]), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(0, true), _vm._v(" "), _c('p', [_c('a', {
+      staticClass: "btn btn-success",
+      attrs: {
+        "href": 'books/borrow/' + book.id
+      }
+    }, [_vm._v("Purchase")])]), _vm._v(" "), (_vm.auth) ? _c('div', [_c('p', [_c('a', {
       staticClass: "btn btn-info",
       attrs: {
         "href": 'books/edit/' + book.id,
@@ -31883,13 +31876,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('p', [_c('span', {
     staticClass: "label label-primary"
   })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('p', [_c('button', {
-    staticClass: "btn btn-success",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._v("Purchase")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

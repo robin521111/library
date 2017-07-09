@@ -12,8 +12,7 @@
        <bookcard v-bind:books="{{json_encode($books)}}" auth="{{Auth::user()}}"></bookcard>
 </div>
 @endforeach
-
-	@include('workshops.schedule')
+    @include('workshops.schedule')
 </div>
 <script src="{{mix('/js/vue.js')}}"></script>
 <script src="{{mix('/js/app.js')}}"></script>

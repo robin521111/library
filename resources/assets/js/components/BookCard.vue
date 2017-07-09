@@ -10,7 +10,7 @@
         <h3>{{book.title}} </h3>
         <br>
         <p> <span class="label label-primary"> </span></p>     
-   <p><button type="button" class="btn btn-success">Purchase</button></p>
+   <p><a class="btn btn-success" :href="'books/borrow/'+ book.id" >Purchase</a></p>
    <div v-if="auth">
        <p><a :href="'books/edit/'+ book.id" class="btn btn-info" role="button">Edit</a>
 <a :href="'books/delete/'+  book.id " class="btn btn-info" role="button">Delete</a>

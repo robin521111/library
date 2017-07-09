@@ -18,6 +18,7 @@ class bookSeeder extends Seeder
             'title' =>str_random(20),
             'tech_field' => str_random(20),
             'status' => 1,
+            'progress' => random_int(1, 100)
         ]);
        
     }

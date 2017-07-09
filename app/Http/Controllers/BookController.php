@@ -35,7 +35,12 @@ class BookController extends Controller
         return BookModel::all() ->toJson();
     }
 
-
+    public function borrowBookById(Request $request, $id)
+    {
+        $book = DB::table('books')->where('id','=',$id)
+                                ->first();
+        return view('book.borrow',['book'=>$book]);
+    }
 
     public function edit(Request $request, $id)
     {
@@ -72,8 +77,6 @@ class BookController extends Controller
                     ->update(['title'=>$book->title,'tech_field'=>$book->tech_field,'imgs'=>$book->imgs,'introduction'=>$book->introduction,'status'=>$book->status]);
 
         return redirect('portal');
-
-
     }
-
+    
 }

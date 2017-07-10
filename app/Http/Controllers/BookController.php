@@ -4,7 +4,7 @@ namespace Library\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use Library\BookModel;
+use Library\Models\BookModel;
 
 class BookController extends Controller
 {
@@ -23,11 +23,8 @@ class BookController extends Controller
 
     public function borrowBook()
     {
-        $books = DB::table('books')->where('id','>',0)
-                                ->take(100)
-                                ->get();
-
-        return view('books.borrow');
+        $books = BookModel::All();
+        return view('books.borrow',['bookModel'=>$books]);
     }
 
     public function getBookJson()
@@ -35,12 +32,7 @@ class BookController extends Controller
         return BookModel::all() ->toJson();
     }
 
-    public function borrowBookById(Request $request, $id)
-    {
-        $book = DB::table('books')->where('id','=',$id)
-                                ->first();
-        return view('book.borrow',['book'=>$book]);
-    }
+
 
     public function edit(Request $request, $id)
     {
@@ -49,12 +41,6 @@ class BookController extends Controller
                                     ->first();
                                     
         return view('books.edit',['book'=>$book]);
-
-        // $preview['book'] = DB::table('books')->where('id','=',$id)
-        //                             ->first();
-        // $preview['workshop']=view('workshops.schedule');
-        // $data =['success','error','warning','info'];
-        // return view('books.edit',['preview'=>$preview],['data'=>$data]);
 
     }
 
@@ -77,6 +63,8 @@ class BookController extends Controller
                     ->update(['title'=>$book->title,'tech_field'=>$book->tech_field,'imgs'=>$book->imgs,'introduction'=>$book->introduction,'status'=>$book->status]);
 
         return redirect('portal');
+
+
     }
-    
+
 }

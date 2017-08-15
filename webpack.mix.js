@@ -14,4 +14,5 @@ const { mix } = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
 mix.js('resources/assets/js/vue.js','public/js/')
 mix.sass('resources/assets/sass/app.scss', 'public/css')
-mix.js('resources/assets/js/chart.js', 'public/js/')
+mix.js('resources/assets/js/canvasChat.js','public/js')
+mix.js('resources/assets/js/vue.js','public/js')

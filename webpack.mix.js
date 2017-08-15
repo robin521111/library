@@ -14,6 +14,7 @@ const { mix } = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
 mix.js('resources/assets/js/vue.js','public/js/')
 mix.sass('resources/assets/sass/app.scss', 'public/css')
+<<<<<<< HEAD
 mix.js('resources/assets/js/chart.js', 'public/js/')
 mix.js('resources/assets/js/easing.js','public/js/')
 mix.js('resources/assets/js/circles.js','public/js/')
@@ -28,3 +29,7 @@ mix.js('vendor/kartik-v/bootstrap-fileinput/js/plugins/sortable.min.js','public/
 //     'resources/assets/css/all.css',
 //     'resources/assets/css/style.css',
 // ], 'public/css/app.css')
+=======
+mix.js('resources/assets/js/canvasChat.js','public/js')
+mix.js('resources/assets/js/vue.js','public/js')
+>>>>>>> origin/master

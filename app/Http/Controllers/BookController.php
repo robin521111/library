@@ -23,11 +23,9 @@ class BookController extends Controller
 
     public function borrowBook()
     {
-        $books = DB::table('books')->where('id','>',0)
-                                ->take(100)
-                                ->get();
+        $books = BookModel::all();
 
-        return view('books.borrow');
+        return view('books.borrow',['bookModel'=>$books]);
     }
 
     public function getBookJson()
@@ -39,7 +37,7 @@ class BookController extends Controller
     {
         $book = DB::table('books')->where('id','=',$id)
                                 ->first();
-        return view('book.borrow',['book'=>$book]);
+        return view('books.borrow',['book'=>$book]);
     }
 
     public function edit(Request $request, $id)

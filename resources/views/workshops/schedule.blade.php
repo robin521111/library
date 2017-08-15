@@ -45,7 +45,7 @@
 				@elseif($loop->index%4===2)
 				<tr class="error">
 				@elseif($loop->index%4 ===3)
-				<tr class="info">
+ 				<tr class="info">
 				@elseif($loop->index%4===0)
 				<tr class="warning">
 				@endif

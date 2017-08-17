@@ -1,12 +1,8 @@
 @extends('layouts.app')
 @section('content')
-@push('scripts')
-<script type="text/javascript" src="../../assets/js/app.js"></script>
-@endpush
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.5/vue.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
-<div class="row">
 
+
+<div class="row">
 @foreach($books as $book)
    <div id="BookCard">
        <bookcard v-bind:books="{{json_encode($books)}}" auth="{{Auth::user()}}"></bookcard>

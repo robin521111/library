@@ -1,11 +1,11 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
- require('./bootstrap');
- window.Vue=require('vue');
+ 
+ //window.Vue= require('vue');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -13,13 +13,17 @@
  */
 
  Vue.component('bookcard',require('./components/BookCard.vue'));
+ // Vue.component('carouselcard', reuqire('./components/CarouselCard.vue'));
 //Vue.component('borrowcard',require('./components/BorrowCard.vue'));
 
 
-
 new Vue({
-	el:'#BookCard',
+  el:'#BookCard',
 });
+
+// new Vue({
+//   el:'#CarouselCard',
+// });
 
 Vue.component('canvasComponent',{
   template:'#canvasChart',
@@ -75,8 +79,6 @@ Vue.component('canvasComponent',{
   //     });
   //   }
 
-
-
 });
 
 new Vue({
@@ -91,6 +93,4 @@ new Vue({
     searchQuery:''
   },
 
-
 });
-

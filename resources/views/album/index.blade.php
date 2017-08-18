@@ -1,3 +1,6 @@
+@extends('layouts.app')
+@section('content')
+<link href="path/to/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -33,3 +36,16 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
+<script src="{{mix('/js/vue.js')}}"></script>
+<script src="{{mix('/js/app.js')}}"></script>
+<script src="{{mix('/js/fileinput.min.js')}}"></script>
+<script src="{{mix('/css/all.css')}}"></script>
+<script src="{{mix('/js/piexif.min.js')}}"></script>
+<script src="{{mix('/js/move-top.js')}}"></script>
+<script src="{{mix('/js/purify.min.js')}}"></script>
+<script src="{{mix('/js/sortable.min.js')}}"></script>
+
+
+
+@endsection

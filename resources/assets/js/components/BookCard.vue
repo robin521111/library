@@ -1,6 +1,5 @@
 <template >
 <div class="container">
-
     <div class="col-sm-6 col-md-4" v-for="book in books">
     <div class="thumbnail">
       <img data-src="holder.js/300x300" alt="...">

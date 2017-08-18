@@ -5,5 +5,14 @@
   "/js/vendor.js": "/js/vendor.js",
   "/js/manifest.js": "/js/manifest.js",
   "/js/chart.js": "/js/chart.js",
-  "/css/all.js": "/css/all.js"
+  "/css/all.js": "/css/all.js",
+  "/js/move-top.js": "/js/move-top.js",
+  "/js/easing.js": "/js/easing.js",
+  "/js/circles.js": "/js/circles.js",
+  "/css/all.css": "/css/all.css",
+  "/css/fileinput.min.js": "/css/fileinput.min.js",
+  "/js/fileinput.min.js": "/js/fileinput.min.js",
+  "/js/piexif.min.js": "/js/piexif.min.js",
+  "/js/sortable.min.js": "/js/sortable.min.js",
+  "/js/purify.min.js": "/js/purify.min.js"
 }

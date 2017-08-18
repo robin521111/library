@@ -23,22 +23,22 @@ class BookController extends Controller
 
     public function borrowBook()
     {
-        $books = BookModel::All();
-        return view('books.borrow',['BookModel'=>$books]);
+        $books = BookModel::all();
+
+        return view('books.borrow',['bookModel'=>$books]);
     }
 
     public function getBookJson()
     {
         return BookModel::all() ->toJson();
     }
+
     public function borrowBookById(Request $request, $id)
     {
         $book = DB::table('books')->where('id','=',$id)
                                 ->first();
         return view('books.borrow',['book'=>$book]);
     }
-
-
 
     public function edit(Request $request, $id)
     {
@@ -69,8 +69,6 @@ class BookController extends Controller
                     ->update(['title'=>$book->title,'tech_field'=>$book->tech_field,'imgs'=>$book->imgs,'introduction'=>$book->introduction,'status'=>$book->status]);
 
         return redirect('portal');
-
-
     }
-
+    
 }

@@ -1,5 +1,194 @@
 @extends('layouts.app')
 @section('content')
+<<<<<<< HEAD
+
+
+
+<div class="content">
+		<div id="about" class="about">
+			<div class="container">
+				<div class="header-section text-center">
+
+					<h2><span> </span>ABOUT<span> </span></h2>
+				</div>
+				<span><p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,
+					lorem quis bibendum auctor,nisi elit consequat ipsum,nec sagittis sem nibh id elit.Duis.</p></span>
+					<div class="years">	 
+						<h4><b>2009</b></h4>
+						<span><h4>Project Manager Web Center</h4></span>
+						<p><i>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,
+							lorem quis bibendum auctor,nisi elit consequat ipsum,nec sagittis sem nibh id elit.Duis.</i></p>
+						</div> 
+
+						<div class="years">	 		
+							<h4><b>2012</b></h4>
+							<span><h4>Manager Delta Coders</h4></span>
+							<p><i>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,
+								lorem quis bibendum auctor,nisi elit consequat ipsum,nec sagittis sem nibh id elit.Duis.</i></p>
+							</div> 
+
+							<div class="years">	 	
+								<h4><b>2013</b></h4>
+								<span><h4>Owner Alternative Labs</h4></span>
+								<div class="labs">
+									<p><i>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,
+										lorem quis bibendum auctor,nisi elit consequat ipsum,nec sagittis sem nibh id elit.Duis.
+										sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec teltus</i></p>
+									</div>
+								</div>
+								<a class="arrow scroll" href="#skills"><span> </span></a>
+							</div>
+						</div>
+
+						<div id="skills" class="skills">
+							<div class="container">
+								<div class="skills-grids">
+									<div class="skill-section text-center">
+										<h2><span> </span>SKILLS<span> </span></h2>
+									</div>
+									<div class="services_grids">
+										<div id="canvas">
+											<div class="skill-grids text-center">
+												<div class="col-md-3">	
+													<div class="skill-grid">
+														<div class="circle" id="circles-1"></div>									
+														<h3>MySql</h3>	
+													</div>								  
+												</div>
+												<div class="col-md-3">	
+													<div class="skill-grid">
+														<div class="circle" id="circles-2"></div>									
+														<h3>AJAX</h3>	
+													</div>								  
+												</div>
+												<div class="col-md-3">	
+													<div class="skill-grid">
+														<div class="circle" id="circles-3"></div>									
+														<h3>PHP</h3>	
+													</div>								  
+												</div>
+												<div class="col-md-3">	
+													<div class="skill-grid">
+														<div class="circle" id="circles-4"></div>									
+														<h3>JAVASCRIPT</h3>	
+													</div>								  
+												</div>
+												<div class="clearfix"> </div>
+											</div>
+										</div>
+									</div>
+									<!---->
+
+									<!--/-->
+								</div>
+							</div>
+							<a class="down scroll" href="#port"><span> </span></a>
+						</div>
+					</div>
+					<div id="port" class="Portfolio">
+						<div class="Portfolio-section text-center">
+							<h2><span> </span>PORTFOLIO<span> </span></h2>
+						</div>
+						<div class="container">
+							<div class="portfolio-grids">
+								<div class="portfolio-grid col-md-4">
+									<a href="#"><img src="../../../imgs/monitr1.png"></a>
+									<p>Proin gravida nibh vel velit auctor aliquet.
+										Aenean sollicitudin, lorem quis bibendum</p>
+										<a class="rightarrow" href="#"><span> </span></a>
+									</div>
+									<div class="portfolio-grid col-md-4">
+										<a href="#"><img src="../../../imgs/monitr2.png"></a>
+										<p>Proin gravida nibh vel velit auctor aliquet.
+											Aenean sollicitudin, lorem quis bibendum</p>
+											<a class="rightarrow" href="#"><span> </span></a>
+										</div>
+										<div class="portfolio-grid col-md-4">
+											<a href="#"><img src="../../imgs/monitr3.png"></a>
+											<p>Proin gravida nibh vel velit auctor aliquet.
+												Aenean sollicitudin, lorem quis bibendum</p>
+												<a class="rightarrow" href="#"><span> </span></a>
+											</div>
+											<div class="clear"> </div>
+										</div>
+										<a class="portdown scroll" href="#contact"><span> </span></a>
+
+									</div>
+								</div>
+							</div>
+							<div  id="contact" class="footer">
+								<div class="container">
+
+									<div class="contact-section text-center">
+										<h2><span> </span>CONTACT<span> </span></h2>
+									</div>
+									<div class="row">
+
+										<div class="col-md-6">
+											<div class="footer-left">
+												<div class="social-icons">
+													<a href="#"><img src="../../imgs/in.png"></a>
+													<a href="#"><img src="../../imgs/twt.png"></a>
+													<a href="#"><img src="../../imgs/fb.png"></a>
+												</div>
+												<p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem
+													quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh
+													id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.
+													Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a
+													ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit.</p>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="footer-right">
+													<div class="form">
+														<form>
+															<input type="text" class="text" value="Name" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name';}">
+															<input type="text" class="text" value="E-mail" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'E-mail';}">
+															<textarea rows="2" cols="70" onFocus="if(this.value == 'Your Message') this.value='';" onBlur="if(this.value == '') this.value='Your Message';" >Your Message</textarea>
+															<div class="clear"> </div>
+															<input type="submit" value="SEND"> 
+														</form>
+													</div>
+												</div>
+												<div class="clear"></div>
+												<p class="copy-right">Copyright &copy; 2014.Company name All rights reserved.</p>
+											</div>
+										</div>
+									</div>
+									<a class="up scroll" href="#top-top"><span> </span></a>
+
+								</div>
+
+
+								<!-- 演示根元素 -->
+								<script src=" {{mix('/js/app.js')}} "></script>
+								<script src=" {{mix('/js/chart.js')}} "></script>
+								<script src=" {{mix('/js/circles.js')}} "></script>
+								<link rel="stylesheet" type="text/css" href="../../../css/all.css">
+								<script>
+									var colors = [
+									['#181115', '#30222A'], ['#181115', '#30222A'], ['#181115', '#30222A'], ['#181115', '#30222A']
+									];
+									for (var i = 1; i <= 5; i++) {
+										var child = document.getElementById('circles-' + i),
+										percentage = 50 + (i * 10);
+
+										Circles.create({
+											id:         child.id,
+											percentage: percentage,
+											radius:     80,
+											width:      15,
+											number:   	percentage / 10,
+											text:       '%',
+											colors:     colors[i - 1]
+										});
+									}
+
+								</script>
+
+@endsection
+=======
 @push('scripts')
 
 @endpush
@@ -144,3 +333,4 @@
 <script src="{{mix('js/vue.js')}}"></script>
 <script src="{{mix('js/canvasChat.js')}}" ></script>
 @endsection
+>>>>>>> origin/master

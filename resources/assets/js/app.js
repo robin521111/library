@@ -5,7 +5,8 @@
  */
  
  //window.Vue= require('vue');
-
+require('./bootstrap.js');
+window.Vue =require('vue');
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -13,7 +14,7 @@
  */
 
  Vue.component('bookcard',require('./components/BookCard.vue'));
- // Vue.component('carouselcard', reuqire('./components/CarouselCard.vue'));
+ Vue.component('carouselcard', reuqire('./components/CarouselCard.vue'));
 //Vue.component('borrowcard',require('./components/BorrowCard.vue'));
 
 
@@ -92,5 +93,4 @@ new Vue({
     gridColumns:['id','name','phone'],
     searchQuery:''
   },
-
 });

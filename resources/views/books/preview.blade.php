@@ -10,8 +10,10 @@
 @endforeach
     @include('workshops.schedule')
 </div>
-<script src="{{mix('/js/vue.js')}}"></script>
 <script src="{{mix('/js/app.js')}}"></script>
+<script src="{{mix('/js/vue.js')}}"></script>
+<script src="{{mix('/js/chart.js')}}"></script>
+
 
 <script type="text/javascript">
 new Vue({

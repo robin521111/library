@@ -32,7 +32,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		3: 0
+/******/ 		12: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -87,7 +87,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "\\js\\" + ({"0":"/js/app","1":"/js/vendor","2":"/js/vue"}[chunkId]||chunkId) + ".js";
+/******/ 		script.src = __webpack_require__.p + "\\js\\" + ({"0":"/js/app","1":"/css/table-search","2":"/js/vendor","3":"/js/sortable.min","4":"/js/fileinput.min","5":"/js/purify.min","6":"/js/piexif.min","7":"/js/move-top","8":"/js/easing","9":"/js/circles","10":"/js/chart","11":"/js/canvasChat"}[chunkId]||chunkId) + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {

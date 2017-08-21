@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
  
- //window.Vue= require('vue');
+ window.Vue= require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -13,9 +13,6 @@
  */
 
  Vue.component('bookcard',require('./components/BookCard.vue'));
- // Vue.component('carouselcard', reuqire('./components/CarouselCard.vue'));
-//Vue.component('borrowcard',require('./components/BorrowCard.vue'));
-
 
 new Vue({
   el:'#BookCard',

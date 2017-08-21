@@ -14,5 +14,8 @@
   "/js/fileinput.min.js": "/js/fileinput.min.js",
   "/js/piexif.min.js": "/js/piexif.min.js",
   "/js/sortable.min.js": "/js/sortable.min.js",
-  "/js/purify.min.js": "/js/purify.min.js"
+  "/js/purify.min.js": "/js/purify.min.js",
+  "/js/canvasChat.js": "/js/canvasChat.js",
+  "/js/index.js": "/js/index.js",
+  "/css/index.css": "/css/index.css"
 }

@@ -18,12 +18,13 @@ mix.js('resources/assets/js/chart.js', 'public/js/')
 mix.js('resources/assets/js/easing.js','public/js/')
 mix.js('resources/assets/js/circles.js','public/js/')
 mix.js('resources/assets/js/move-top.js','public/js/')
-mix.styles(['vendor/kartik-v/bootstrap-fileinput/css/fileinput-rtl.min.css','vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css'],'public/css/all.css')
+mix.styles(['resources/assets/css/index.css'],'public/css/index.css')
+mix.styles(['vendor/kartik-v/bootstrap-fileinput/css/fileinput-rtl.min.css','vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css','resources/assets/css/table-search.css'],'public/css/all.css')
 mix.js('vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js','public/js/')
 mix.js('vendor/kartik-v/bootstrap-fileinput/js/plugins/piexif.min.js','public/js/')
 mix.js('vendor/kartik-v/bootstrap-fileinput/js/plugins/purify.min.js','public/js/')
 mix.js('vendor/kartik-v/bootstrap-fileinput/js/plugins/sortable.min.js','public/js/')
-
+mix.js('node_modules/element-ui/lib/index.js','public/js/')
 // mix.styles([
 //     'resources/assets/css/all.css',
 //     'resources/assets/css/style.css',

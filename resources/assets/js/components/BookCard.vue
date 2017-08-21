@@ -4,7 +4,6 @@
     <div class="thumbnail">
       <img data-src="holder.js/300x300" alt="...">
       <div class="caption">
-       <div id="BookCard">
        </div>
         <h3>{{book.title}} </h3>
         <br>
@@ -24,7 +23,6 @@
 </div>
    </div>
    </div>
-   </div>
 </div>
 
 </template>
@@ -37,6 +35,9 @@
         props:{
             books: Array,
             auth: Object,
+        }, 
+        data: function () {
+          return new Date()
         }
     }
 </script>

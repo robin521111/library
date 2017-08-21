@@ -14,7 +14,7 @@ window.Vue =require('vue');
  */
 
  Vue.component('bookcard',require('./components/BookCard.vue'));
- Vue.component('carouselcard', reuqire('./components/CarouselCard.vue'));
+ //Vue.component('carouselcard', reuqire('./components/CarouselCard.vue'));
 //Vue.component('borrowcard',require('./components/BorrowCard.vue'));
 
 

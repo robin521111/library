@@ -24,7 +24,6 @@ Route::get('/books/edit/{idbooks}', 'BookController@edit');
 Route::get('/books/delete/{id}', 'BookController@delete')->name('delete');
 Route::post('/books/update/{id}', 'BookController@update')->name('update');
 
-
 Route::get('/album', 'AlbumController@index');
 Route::get('form','TestController@form');
 Route::post('form/validate','TestController@validate');

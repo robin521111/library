@@ -23,8 +23,11 @@ Route::get('/submit', 'BookController@submit');
 Route::get('/books/edit/{idbooks}', 'BookController@edit');
 Route::get('/books/delete/{id}', 'BookController@delete')->name('delete');
 Route::post('/books/update/{id}', 'BookController@update')->name('update');
+<<<<<<< HEAD
 Route::get('login/github', 'Auth\LoginController@redirectToProvider');
 Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
+=======
+>>>>>>> 17750bb7994fefdfec8e0af5ff24a99b28036c49
 
 Route::get('/album', 'AlbumController@index');
 Route::get('form','TestController@form');

@@ -4,7 +4,7 @@ namespace Library\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use Library\BookModel;
+use Library\Models\BookModel;
 
 class BookController extends Controller
 {
@@ -23,7 +23,9 @@ class BookController extends Controller
 
     public function borrowBook()
     {
-        $books = BookModel::all();
+        $books = DB::table('books')->where('id','>',0)
+                                    ->take(100)
+                                    ->get();
 
         return view('books.borrow',['bookModel'=>$books]);
     }
@@ -37,7 +39,7 @@ class BookController extends Controller
     {
         $book = DB::table('books')->where('id','=',$id)
                                 ->first();
-        return view('books.borrow',['book'=>$book]);
+        return view('books.borrow',['bookModel'=>$book]);
     }
 
     public function edit(Request $request, $id)
@@ -47,12 +49,6 @@ class BookController extends Controller
                                     ->first();
                                     
         return view('books.edit',['book'=>$book]);
-
-        // $preview['book'] = DB::table('books')->where('id','=',$id)
-        //                             ->first();
-        // $preview['workshop']=view('workshops.schedule');
-        // $data =['success','error','warning','info'];
-        // return view('books.edit',['preview'=>$preview],['data'=>$data]);
 
     }
 

@@ -4,8 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
  
+<<<<<<< HEAD
  window.Vue= require('vue');
 
+=======
+ //window.Vue= require('vue');
+require('./bootstrap.js');
+window.Vue =require('vue');
+>>>>>>> 17750bb7994fefdfec8e0af5ff24a99b28036c49
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -13,6 +19,12 @@
  */
 
  Vue.component('bookcard',require('./components/BookCard.vue'));
+<<<<<<< HEAD
+=======
+ //Vue.component('carouselcard', reuqire('./components/CarouselCard.vue'));
+//Vue.component('borrowcard',require('./components/BorrowCard.vue'));
+
+>>>>>>> 17750bb7994fefdfec8e0af5ff24a99b28036c49
 
 new Vue({
   el:'#BookCard',
@@ -89,5 +101,4 @@ new Vue({
     gridColumns:['id','name','phone'],
     searchQuery:''
   },
-
 });

@@ -15,6 +15,10 @@
   "/js/piexif.min.js": "/js/piexif.min.js",
   "/js/sortable.min.js": "/js/sortable.min.js",
   "/js/purify.min.js": "/js/purify.min.js",
+<<<<<<< HEAD
   "/js/canvasChat.js": "/js/canvasChat.js",
   "/css/table-search.js": "/css/table-search.js"
+=======
+  "/js/canvasChat.js": "/js/canvasChat.js"
+>>>>>>> 17750bb7994fefdfec8e0af5ff24a99b28036c49
 }

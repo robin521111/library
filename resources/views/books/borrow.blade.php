@@ -30,6 +30,12 @@
 			</tbody>
 		</table>
 	</div>
+<<<<<<< HEAD
+=======
+
+</script>
+
+>>>>>>> 17750bb7994fefdfec8e0af5ff24a99b28036c49
 
 </script>
 <div class="content">
@@ -193,9 +199,40 @@
 								
 
 
+<<<<<<< HEAD
+
+=======
+<style type="text/css">
+>>>>>>> 17750bb7994fefdfec8e0af5ff24a99b28036c49
 
 
+<<<<<<< HEAD
+=======
+	.arrow {
+		display: inline-block;
+		vertical-align: middle;
+		width: 0;
+		height: 0;
+		margin-left: 5px;
+		opacity: 0.66;
+	}
 
+	.arrow.asc {
+		border-left: 4px solid transparent;
+		border-right: 4px solid transparent;
+		border-bottom: 4px solid #fff;
+	}
+
+	.arrow.dsc {
+		border-left: 4px solid transparent;
+		border-right: 4px solid transparent;
+		border-top: 4px solid #fff;
+	}
+
+</style>
+
+
+>>>>>>> 17750bb7994fefdfec8e0af5ff24a99b28036c49
 <div class="container">
 
 	<div id="filterTest">

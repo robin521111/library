@@ -31,3 +31,4 @@ mix.copyDirectory('resources/assets/fonts/element-ui/','public/css/fonts/')
 //     'resources/assets/css/style.css',
 // ], 'public/css/app.css')
 mix.js('resources/assets/js/canvasChat.js','public/js')
+mix.js('resources/assets/js/notify.js','public/js/')

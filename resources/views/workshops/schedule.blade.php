@@ -38,55 +38,62 @@
 				</tr>
 
 
-			@endfor --}}
-			@foreach($books as $book)
-			 @if($loop->index%4 ===1)
+				@endfor --}}
+				@foreach($books as $book)
+				@if($loop->index%4 ===1)
 				<tr class="success" id="">
-				@elseif($loop->index%4===2)
-				<tr class="error">
-				@elseif($loop->index%4 ===3)
- 				<tr class="info">
-				@elseif($loop->index%4===0)
-				<tr class="warning">
-				@endif
+					@elseif($loop->index%4===2)
+					<tr class="error">
+						@elseif($loop->index%4 ===3)
+						<tr class="info">
+							@elseif($loop->index%4===0)
+							<tr class="warning">
+								@endif
 
-					<td>
-						{{$book->id}}
-					</td>
-					<td>
-						{{$book->title}}
-					</td>
-					<td>
-						{{$book->introduction}}
-					</td>
-					<td>
-						{{$book->tech_field}}
-					</td>
-					<td>
-						<div id="Workshop_item">
-					  <button type="button" class="btn btn-success" @click="show = !show">
-					    Book this workshop
-					  </button>
-					  <transition
-					    v-on:before-enter="beforeEnter"
-					    v-on:enter="enter"
-					    v-on:leave="leave"
-					    v-bind:css="false"
-					  >
-					    <p v-if="show">
-					      Double click for confirm!
-					    </p>
-					  </transition>
-					</div>
-										
-										</td>
-									</tr>
-				@endforeach
-			</tbody>
-		</table>
+								<td>
+									{{$book->id}}
+								</td>
+								<td>
+									{{$book->title}}
+								</td>
+								<td>
+									{{$book->introduction}}
+								</td>
+								<td>
+									{{$book->tech_field}}
+								</td>
+								<td>
+									<div id="Workshop_item">
+										<notify></notify>
+									</div>
+							</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+
+			</div>
+
+
+		</div>
+		<div id="message">
 			
 		</div>
 
-		
-	</div>
-		
+		<link rel="stylesheet" type="text/css" href="{{mix('css/index.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{mix('css/app.css')}}">
+		<script src="{{mix('js/app.js')}}"></script>
+		<script src="{{mix('js/index.js')}}"></script>
+		<script src="{{mix('js/notify.js')}}"></script>
+		<script src="{{mix('js/vue.js')}}"></script>
+		<script>
+			new Vue({
+				el:'#message',
+				methods:{
+					open(){
+						this.$message('这是一条信息');
+					},
+
+				}
+			})
+		</script>

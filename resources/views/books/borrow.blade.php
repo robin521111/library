@@ -32,7 +32,6 @@
 	</div>
 </script>
 
->>>>>>> 17750bb7994fefdfec8e0af5ff24a99b28036c49
 
 </script>
 <div class="content">

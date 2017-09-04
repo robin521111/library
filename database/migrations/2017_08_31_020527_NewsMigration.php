@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Comments extends Migration
+class NewsMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class Comments extends Migration
      */
     public function up()
     {
-                Schema::create('comment', function (Blueprint $table) {
+         Schema::create('News_tbl', function (Blueprint $table) {
                 $table->increments('id');
+                $table->string('title');
                 $table->string('content');
+                $table->string('author');
+                $table->string('comments');
+                $table->timestamp('created_at')->nullable();
             });
+   
     }
 
     /**

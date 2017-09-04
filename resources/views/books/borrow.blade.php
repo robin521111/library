@@ -32,7 +32,6 @@
 	</div>
 </script>
 
->>>>>>> 17750bb7994fefdfec8e0af5ff24a99b28036c49
 
 </script>
 <div class="content">
@@ -194,13 +193,10 @@
 
 								<!-- 演示根元素 -->
 								
-<<<<<<< HEAD
 <style type="text/css">
 
 
 </style>
-
->>>>>>> 17750bb7994fefdfec8e0af5ff24a99b28036c49
 <div class="container">
 
 	<div id="filterTest">

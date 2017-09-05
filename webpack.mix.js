@@ -25,10 +25,9 @@ mix.js('vendor/kartik-v/bootstrap-fileinput/js/plugins/piexif.min.js','public/js
 mix.js('vendor/kartik-v/bootstrap-fileinput/js/plugins/purify.min.js','public/js/')
 mix.js('vendor/kartik-v/bootstrap-fileinput/js/plugins/sortable.min.js','public/js/')
 mix.js('node_modules/element-ui/lib/index.js','public/js/')
-mix.copyDirectory('resources/assets/fonts/element-ui/','public/css/fonts/')
 // mix.styles([
 //     'resources/assets/css/all.css',
 //     'resources/assets/css/style.css',
 // ], 'public/css/app.css')
-mix.js('resources/assets/js/canvasChat.js','public/js')
+mix.js('resources/assets/js/canvasChat.js','public/js/')
 mix.js('resources/assets/js/notify.js','public/js/')

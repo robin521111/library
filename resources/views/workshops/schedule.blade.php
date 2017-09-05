@@ -64,36 +64,31 @@
 								</td>
 								<td>
 									<div id="Workshop_item">
-										<notify></notify>
+										<notifycard></notifycard>
 									</div>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
+
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+
+				</div>
+
+
+			</div>
+			<div id="message">
+										
 
 			</div>
 
-
-		</div>
-		<div id="message">
-			
-		</div>
-
-		<link rel="stylesheet" type="text/css" href="{{mix('css/index.css')}}">
-		<link rel="stylesheet" type="text/css" href="{{mix('css/app.css')}}">
-		<script src="{{mix('js/app.js')}}"></script>
-		<script src="{{mix('js/index.js')}}"></script>
-		<script src="{{mix('js/notify.js')}}"></script>
-		<script src="{{mix('js/vue.js')}}"></script>
-		<script>
+			<link rel="stylesheet" type="text/css" href="{{mix('css/index.css')}}">
+			<link rel="stylesheet" type="text/css" href="{{mix('css/app.css')}}">
+			<script src="{{mix('js/app.js')}}"></script>
+			<script src="{{mix('js/index.js')}}"></script>
+			<script src="{{mix('js/vue.js')}}"></script>
+			<script>
 			new Vue({
-				el:'#message',
-				methods:{
-					open(){
-						this.$message('这是一条信息');
-					},
-
-				}
+				el:"#Workshop_item"
 			})
-		</script>
+			</script>

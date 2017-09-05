@@ -17,5 +17,6 @@
   "/js/purify.min.js": "/js/purify.min.js",
   "/js/canvasChat.js": "/js/canvasChat.js",
   "/js/index.js": "/js/index.js",
-  "/css/index.css": "/css/index.css"
+  "/css/index.css": "/css/index.css",
+  "/js/notify.js": "/js/notify.js"
 }

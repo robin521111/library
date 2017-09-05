@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 51);
+/******/ 	return __webpack_require__(__webpack_require__.s = 54);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,7 +73,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(9);
+var bind = __webpack_require__(8);
 
 /*global toString:true*/
 
@@ -401,6 +401,107 @@ module.exports = g;
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(25);
+
+var PROTECTION_PREFIX = /^\)\]\}',?\n/;
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(4);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(4);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      data = data.replace(PROTECTION_PREFIX, '');
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10660,108 +10761,271 @@ return jQuery;
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(38);
+var settle = __webpack_require__(17);
+var buildURL = __webpack_require__(20);
+var parseHeaders = __webpack_require__(26);
+var isURLSameOrigin = __webpack_require__(24);
+var createError = __webpack_require__(7);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(19);
 
-var PROTECTION_PREFIX = /^\)\]\}',?\n/;
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
 
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(5);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(5);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
     }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
 
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      data = data.replace(PROTECTION_PREFIX, '');
+    var request = new XMLHttpRequest();
+    var loadEvent = 'onreadystatechange';
+    var xDomain = false;
+
+    // For IE 8/9 CORS support
+    // Only supports POST and GET calls and doesn't returns the response headers.
+    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
+    if ("development" !== 'test' &&
+        typeof window !== 'undefined' &&
+        window.XDomainRequest && !('withCredentials' in request) &&
+        !isURLSameOrigin(config.url)) {
+      request = new window.XDomainRequest();
+      loadEvent = 'onload';
+      xDomain = true;
+      request.onprogress = function handleProgress() {};
+      request.ontimeout = function handleTimeout() {};
+    }
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password || '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    // Listen for ready state
+    request[loadEvent] = function handleLoad() {
+      if (!request || (request.readyState !== 4 && !xDomain)) {
+        return;
+      }
+
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
+
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        // IE sends 1223 instead of 204 (https://github.com/mzabriskie/axios/issues/201)
+        status: request.status === 1223 ? 204 : request.status,
+        statusText: request.status === 1223 ? 'No Content' : request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED'));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      var cookies = __webpack_require__(22);
+
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+          cookies.read(config.xsrfCookieName) :
+          undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (config.withCredentials) {
+      request.withCredentials = true;
+    }
+
+    // Add responseType to request if needed
+    if (config.responseType) {
       try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
+        request.responseType = config.responseType;
+      } catch (e) {
+        if (request.responseType !== 'json') {
+          throw e;
+        }
+      }
     }
-    return data;
-  }],
 
-  timeout: 0,
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
 
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
 
-  maxContentLength: -1,
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
 
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (requestData === undefined) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
 };
 
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(45)))
 
 /***/ }),
-/* 4 */
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(16);
+
+/**
+ * Create an Error with the specified message, config, error code, and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ @ @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, response);
+};
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20856,416 +21120,22 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(0);
-var settle = __webpack_require__(30);
-var buildURL = __webpack_require__(33);
-var parseHeaders = __webpack_require__(39);
-var isURLSameOrigin = __webpack_require__(37);
-var createError = __webpack_require__(8);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(32);
-
-module.exports = function xhrAdapter(config) {
-  return new Promise(function dispatchXhrRequest(resolve, reject) {
-    var requestData = config.data;
-    var requestHeaders = config.headers;
-
-    if (utils.isFormData(requestData)) {
-      delete requestHeaders['Content-Type']; // Let the browser set it
-    }
-
-    var request = new XMLHttpRequest();
-    var loadEvent = 'onreadystatechange';
-    var xDomain = false;
-
-    // For IE 8/9 CORS support
-    // Only supports POST and GET calls and doesn't returns the response headers.
-    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-    if ("development" !== 'test' &&
-        typeof window !== 'undefined' &&
-        window.XDomainRequest && !('withCredentials' in request) &&
-        !isURLSameOrigin(config.url)) {
-      request = new window.XDomainRequest();
-      loadEvent = 'onload';
-      xDomain = true;
-      request.onprogress = function handleProgress() {};
-      request.ontimeout = function handleTimeout() {};
-    }
-
-    // HTTP basic authentication
-    if (config.auth) {
-      var username = config.auth.username || '';
-      var password = config.auth.password || '';
-      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
-    }
-
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
-
-    // Set the request timeout in MS
-    request.timeout = config.timeout;
-
-    // Listen for ready state
-    request[loadEvent] = function handleLoad() {
-      if (!request || (request.readyState !== 4 && !xDomain)) {
-        return;
-      }
-
-      // The request errored out and we didn't get a response, this will be
-      // handled by onerror instead
-      // With one exception: request that using file: protocol, most browsers
-      // will return status as 0 even though it's a successful request
-      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-        return;
-      }
-
-      // Prepare the response
-      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
-      var response = {
-        data: responseData,
-        // IE sends 1223 instead of 204 (https://github.com/mzabriskie/axios/issues/201)
-        status: request.status === 1223 ? 204 : request.status,
-        statusText: request.status === 1223 ? 'No Content' : request.statusText,
-        headers: responseHeaders,
-        config: config,
-        request: request
-      };
-
-      settle(resolve, reject, response);
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle low level network errors
-    request.onerror = function handleError() {
-      // Real errors are hidden from us by the browser
-      // onerror should only fire if it's a network error
-      reject(createError('Network Error', config));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle timeout
-    request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED'));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Add xsrf header
-    // This is only done if running in a standard browser environment.
-    // Specifically not if we're in a web worker, or react-native.
-    if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(35);
-
-      // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
-          cookies.read(config.xsrfCookieName) :
-          undefined;
-
-      if (xsrfValue) {
-        requestHeaders[config.xsrfHeaderName] = xsrfValue;
-      }
-    }
-
-    // Add headers to the request
-    if ('setRequestHeader' in request) {
-      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
-          // Remove Content-Type if data is undefined
-          delete requestHeaders[key];
-        } else {
-          // Otherwise add header to the request
-          request.setRequestHeader(key, val);
-        }
-      });
-    }
-
-    // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
-    }
-
-    // Add responseType to request if needed
-    if (config.responseType) {
-      try {
-        request.responseType = config.responseType;
-      } catch (e) {
-        if (request.responseType !== 'json') {
-          throw e;
-        }
-      }
-    }
-
-    // Handle progress if needed
-    if (typeof config.onDownloadProgress === 'function') {
-      request.addEventListener('progress', config.onDownloadProgress);
-    }
-
-    // Not all browsers support upload events
-    if (typeof config.onUploadProgress === 'function' && request.upload) {
-      request.upload.addEventListener('progress', config.onUploadProgress);
-    }
-
-    if (config.cancelToken) {
-      // Handle cancellation
-      config.cancelToken.promise.then(function onCanceled(cancel) {
-        if (!request) {
-          return;
-        }
-
-        request.abort();
-        reject(cancel);
-        // Clean up request
-        request = null;
-      });
-    }
-
-    if (requestData === undefined) {
-      requestData = null;
-    }
-
-    // Send the request
-    request.send(requestData);
-  });
-};
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A `Cancel` is an object that is thrown when an operation is canceled.
- *
- * @class
- * @param {string=} message The message.
- */
-function Cancel(message) {
-  this.message = message;
-}
-
-Cancel.prototype.toString = function toString() {
-  return 'Cancel' + (this.message ? ': ' + this.message : '');
-};
-
-Cancel.prototype.__CANCEL__ = true;
-
-module.exports = Cancel;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-};
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var enhanceError = __webpack_require__(29);
-
-/**
- * Create an Error with the specified message, config, error code, and response.
- *
- * @param {string} message The error message.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- @ @param {Object} [response] The response.
- * @returns {Error} The created error.
- */
-module.exports = function createError(message, config, code, response) {
-  var error = new Error(message);
-  return enhanceError(error, config, code, response);
-};
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function bind(fn, thisArg) {
-  return function wrap() {
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-    return fn.apply(thisArg, args);
-  };
-};
-
-
-/***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _canvasData;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-__webpack_require__(42);
-window.Vue = __webpack_require__(4);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('bookcard', __webpack_require__(46));
-//Vue.component('carouselcard', require('./components/CarouselCard.vue'));
-//Vue.component('borrowcard',require('./components/BorrowCard.vue'));
-
-
-new Vue({
-  el: '#BookCard'
-});
-// new Vue({
-//   el:'#CarouselCard',
-// });
-
-
-Vue.component('canvasComponent', {
-  template: '#canvasChart',
-
-  data: function data() {
-    var sortOrders = {}; //定义sortOrders为空字典
-    //forEach为columns的每一个元素执行函数内部操作
-    this.columns.forEach(function (key) {
-      //将columns的元素设定为key值,value值都为1
-      sortOrders[key] = 1;
-    });
-    return {
-      sortKey: '',
-      sortOrders: sortOrders,
-      items: {}
-    };
-  },
-  props: {
-    canvasData: Array,
-    columns: Array,
-    filterKey: String
-  },
-  methods: {
-    //sortBy[key]理解: 当click时执行该函数,sortBy为一个函数方法,接受key参数
-    sortBy: function sortBy(key) {
-      //并将参数赋值给内部变量
-      this.sortKey = key;
-      //更新排序序列,调用sortOrders将key代表的列反序
-      console.log(this.sortOrders[key]); // 1
-      this.sortOrders[key] = this.sortOrders[key] * -1;
-      console.log(this.sortOrders[key]); // -1
-    }
-  },
-  computed: {
-    filterI: function filterI() {
-      var _this = this;
-
-      return this.canvasData.filter(function (item) {
-        return item.name.match(_this.filterKey);
-      });
-    }
-
-  }
-  // mounted() {
-  //     $.getJSON('/api/book/getJson',function (data) {
-  //       $.each(data,function (key,val) {
-  //         this.item[key]=key;
-  //         this.item[val]=val; 
-
-  //       })
-  //     });
-  //   }
-
-});
-
-// Vue.component('',{
-//   template:'#filterTest',
-//  data:{
-//     'keywords':[{"id":"9","name":"missy","phone":"21324234532"},   
-//     {"id":"3","name":"Mahama","phone":"345604542"},
-//     {"id":"2","name":"Bernard","phone":"241242542"}],
-
-//     canvasData:{"空间":34,"微博":30,"指导":29,"小明":28 , "图书馆": 27 , "PHP":26 , "项目" :25 ,"健康":24 , "JS" :23 ,'html' :22,'各镇': 22 ,'勋章' :21 ,'信息':20,'开发':19 , '设计':18 , '开幕式' :17 , '浏览器' :16 ,'身份':15,'图片': 14 , '中国' :13 , '伟大' :12 ,'地方':11 ,'噩梦' :10 ,'回复' :9 ,'空间' :8 , '请问' : 7 , '类库' : 6 , '激活' : 5 ,'规范' :4 ,'微软' :3 , '分割': 2 , '不错' :1 , '多个' :1, '斯蒂芬' :1, '分割' :1, '回过头' :1, '慈悲' :1, 'svg' :1, '三个' :1, '十多个' :1, '语句' :1, '写错' :1, '别冲动' :1, '请问' :1, '细长的' :1, '风光' :1, '梵蒂冈' :1, '成办' :1, '这些' :1, '是的' :1, '风格化' :1, '儿童歌' :1, '所得税' :1, '阿斯顿' :1, '斯蒂芬' :1, '电饭锅' :1, '很规范' :1, '车秩序' :1, '上网' :1, '过负荷' :1, '放到' :1, '电饭锅' :1, '东方红' :1, '风格化' :1, '请问' :1, '人头' :1, '让他' :1, '分隔' :1, '大概' :1, '福利' :1, '激活' :1, '断食' :1, '风格' :1, '瓦尔特' :1, '对方' :1,  '请问' :1, '而' :1, '人头' :1, '统一' :1, '一份' :1, '放到' :1, '放到' :1, '放到' :1, '放到' :1, '上网' :1, '我是' :1, '的' :1, '耳朵' :1, '发热' :1, '乳房' :1, '跟他' :1, '通过' :1, '还好用' :1, '雅黑' :1, '聚聚' :1, '看过' :1, '似的' :1, '独' :1, '明年' :1, '手头紧' :1, '换个' :1, '数据' :1, '导入' :1, '回归' :1},
-//     gridColumns:['id','name','phone'],
-//     searchQuery:''
-//   },
-// });
-
-new Vue({
-  el: '#filterTest',
-  data: {
-    'keywords': [{ "id": "9", "name": "missy", "phone": "21324234532" }, { "id": "3", "name": "Mahama", "phone": "345604542" }, { "id": "2", "name": "Bernard", "phone": "241242542" }],
-
-    canvasData: (_canvasData = { "空间": 34, "微博": 30, "指导": 29, "小明": 28, "图书馆": 27, "PHP": 26, "项目": 25, "健康": 24, "JS": 23, 'html': 22, '各镇': 22, '勋章': 21, '信息': 20, '开发': 19, '设计': 18, '开幕式': 17, '浏览器': 16, '身份': 15, '图片': 14, '中国': 13, '伟大': 12, '地方': 11, '噩梦': 10, '回复': 9 }, _defineProperty(_canvasData, '\u7A7A\u95F4', 8), _defineProperty(_canvasData, '请问', 7), _defineProperty(_canvasData, '类库', 6), _defineProperty(_canvasData, '激活', 5), _defineProperty(_canvasData, '规范', 4), _defineProperty(_canvasData, '微软', 3), _defineProperty(_canvasData, '分割', 2), _defineProperty(_canvasData, '不错', 1), _defineProperty(_canvasData, '多个', 1), _defineProperty(_canvasData, '斯蒂芬', 1), _defineProperty(_canvasData, '\u5206\u5272', 1), _defineProperty(_canvasData, '回过头', 1), _defineProperty(_canvasData, '慈悲', 1), _defineProperty(_canvasData, 'svg', 1), _defineProperty(_canvasData, '三个', 1), _defineProperty(_canvasData, '十多个', 1), _defineProperty(_canvasData, '语句', 1), _defineProperty(_canvasData, '写错', 1), _defineProperty(_canvasData, '别冲动', 1), _defineProperty(_canvasData, '\u8BF7\u95EE', 1), _defineProperty(_canvasData, '细长的', 1), _defineProperty(_canvasData, '风光', 1), _defineProperty(_canvasData, '梵蒂冈', 1), _defineProperty(_canvasData, '成办', 1), _defineProperty(_canvasData, '这些', 1), _defineProperty(_canvasData, '是的', 1), _defineProperty(_canvasData, '风格化', 1), _defineProperty(_canvasData, '儿童歌', 1), _defineProperty(_canvasData, '所得税', 1), _defineProperty(_canvasData, '阿斯顿', 1), _defineProperty(_canvasData, '\u65AF\u8482\u82AC', 1), _defineProperty(_canvasData, '电饭锅', 1), _defineProperty(_canvasData, '很规范', 1), _defineProperty(_canvasData, '车秩序', 1), _defineProperty(_canvasData, '上网', 1), _defineProperty(_canvasData, '过负荷', 1), _defineProperty(_canvasData, '放到', 1), _defineProperty(_canvasData, '\u7535\u996D\u9505', 1), _defineProperty(_canvasData, '东方红', 1), _defineProperty(_canvasData, '\u98CE\u683C\u5316', 1), _defineProperty(_canvasData, '\u8BF7\u95EE', 1), _defineProperty(_canvasData, '人头', 1), _defineProperty(_canvasData, '让他', 1), _defineProperty(_canvasData, '分隔', 1), _defineProperty(_canvasData, '大概', 1), _defineProperty(_canvasData, '福利', 1), _defineProperty(_canvasData, '\u6FC0\u6D3B', 1), _defineProperty(_canvasData, '断食', 1), _defineProperty(_canvasData, '风格', 1), _defineProperty(_canvasData, '瓦尔特', 1), _defineProperty(_canvasData, '对方', 1), _defineProperty(_canvasData, '\u8BF7\u95EE', 1), _defineProperty(_canvasData, '而', 1), _defineProperty(_canvasData, '\u4EBA\u5934', 1), _defineProperty(_canvasData, '统一', 1), _defineProperty(_canvasData, '一份', 1), _defineProperty(_canvasData, '\u653E\u5230', 1), _defineProperty(_canvasData, '\u653E\u5230', 1), _defineProperty(_canvasData, '\u653E\u5230', 1), _defineProperty(_canvasData, '\u653E\u5230', 1), _defineProperty(_canvasData, '\u4E0A\u7F51', 1), _defineProperty(_canvasData, '我是', 1), _defineProperty(_canvasData, '的', 1), _defineProperty(_canvasData, '耳朵', 1), _defineProperty(_canvasData, '发热', 1), _defineProperty(_canvasData, '乳房', 1), _defineProperty(_canvasData, '跟他', 1), _defineProperty(_canvasData, '通过', 1), _defineProperty(_canvasData, '还好用', 1), _defineProperty(_canvasData, '雅黑', 1), _defineProperty(_canvasData, '聚聚', 1), _defineProperty(_canvasData, '看过', 1), _defineProperty(_canvasData, '似的', 1), _defineProperty(_canvasData, '独', 1), _defineProperty(_canvasData, '明年', 1), _defineProperty(_canvasData, '手头紧', 1), _defineProperty(_canvasData, '换个', 1), _defineProperty(_canvasData, '数据', 1), _defineProperty(_canvasData, '导入', 1), _defineProperty(_canvasData, '回归', 1), _canvasData),
-    gridColumns: ['id', 'name', 'phone'],
-    searchQuery: ''
-  }
-});
+module.exports = __webpack_require__(11);
 
 /***/ }),
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(24);
-
-/***/ }),
-/* 24 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(9);
-var Axios = __webpack_require__(26);
-var defaults = __webpack_require__(3);
+var bind = __webpack_require__(8);
+var Axios = __webpack_require__(13);
+var defaults = __webpack_require__(2);
 
 /**
  * Create an instance of Axios
@@ -21298,15 +21168,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(6);
-axios.CancelToken = __webpack_require__(25);
-axios.isCancel = __webpack_require__(7);
+axios.Cancel = __webpack_require__(5);
+axios.CancelToken = __webpack_require__(12);
+axios.isCancel = __webpack_require__(6);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(40);
+axios.spread = __webpack_require__(27);
 
 module.exports = axios;
 
@@ -21315,13 +21185,13 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 25 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(6);
+var Cancel = __webpack_require__(5);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -21379,18 +21249,18 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 26 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(2);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(27);
-var dispatchRequest = __webpack_require__(28);
-var isAbsoluteURL = __webpack_require__(36);
-var combineURLs = __webpack_require__(34);
+var InterceptorManager = __webpack_require__(14);
+var dispatchRequest = __webpack_require__(15);
+var isAbsoluteURL = __webpack_require__(23);
+var combineURLs = __webpack_require__(21);
 
 /**
  * Create a new instance of Axios
@@ -21471,7 +21341,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 27 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21530,16 +21400,16 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 28 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(31);
-var isCancel = __webpack_require__(7);
-var defaults = __webpack_require__(3);
+var transformData = __webpack_require__(18);
+var isCancel = __webpack_require__(6);
+var defaults = __webpack_require__(2);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -21616,7 +21486,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 29 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21642,13 +21512,13 @@ module.exports = function enhanceError(error, config, code, response) {
 
 
 /***/ }),
-/* 30 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(8);
+var createError = __webpack_require__(7);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -21674,7 +21544,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 31 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21701,7 +21571,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 32 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21744,7 +21614,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 33 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21819,7 +21689,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 34 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21838,7 +21708,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 35 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21898,7 +21768,7 @@ module.exports = (
 
 
 /***/ }),
-/* 36 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21919,7 +21789,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 37 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21994,7 +21864,7 @@ module.exports = (
 
 
 /***/ }),
-/* 38 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22013,7 +21883,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 39 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22057,7 +21927,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 40 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22091,61 +21961,11 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 41 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component be mounted!');
-    },
-
-    props: {
-        books: Array,
-        auth: Object
-    },
-    data: function data() {
-        return new Date();
-    }
-});
-
-/***/ }),
-/* 42 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(44);
+window._ = __webpack_require__(30);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -22154,9 +21974,9 @@ window._ = __webpack_require__(44);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(2);
+  window.$ = window.jQuery = __webpack_require__(3);
 
-  __webpack_require__(43);
+  __webpack_require__(29);
 } catch (e) {}
 
 /**
@@ -22165,7 +21985,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(23);
+window.axios = __webpack_require__(10);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -22199,7 +22019,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 43 */
+/* 29 */
 /***/ (function(module, exports) {
 
 /*!
@@ -24582,7 +24402,7 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 44 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -41671,10 +41491,10 @@ if (typeof jQuery === 'undefined') {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(49)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(33)(module)))
 
 /***/ }),
-/* 45 */
+/* 31 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -41864,41 +41684,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(47)(
-  /* script */
-  __webpack_require__(41),
-  /* template */
-  __webpack_require__(48),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "D:\\CodeForFun\\Homestead\\Code\\library\\resources\\assets\\js\\components\\BookCard.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] BookCard.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3c2838fc", Component.options)
-  } else {
-    hotAPI.reload("data-v-3c2838fc", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 47 */
+/* 32 */
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -41955,7 +41741,250 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
+/* 33 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _canvasData;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+__webpack_require__(28);
+window.Vue = __webpack_require__(9);
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+Vue.component('bookcard', __webpack_require__(49));
+//Vue.component('carouselcard', require('./components/CarouselCard.vue'));
+//Vue.component('borrowcard',require('./components/BorrowCard.vue'));
+
+
+new Vue({
+  el: '#BookCard'
+});
+// new Vue({
+//   el:'#CarouselCard',
+// });
+
+
+Vue.component('canvasComponent', {
+  template: '#canvasChart',
+
+  data: function data() {
+    var sortOrders = {}; //定义sortOrders为空字典
+    //forEach为columns的每一个元素执行函数内部操作
+    this.columns.forEach(function (key) {
+      //将columns的元素设定为key值,value值都为1
+      sortOrders[key] = 1;
+    });
+    return {
+      sortKey: '',
+      sortOrders: sortOrders,
+      items: {}
+    };
+  },
+  props: {
+    canvasData: Array,
+    columns: Array,
+    filterKey: String
+  },
+  methods: {
+    //sortBy[key]理解: 当click时执行该函数,sortBy为一个函数方法,接受key参数
+    sortBy: function sortBy(key) {
+      //并将参数赋值给内部变量
+      this.sortKey = key;
+      //更新排序序列,调用sortOrders将key代表的列反序
+      console.log(this.sortOrders[key]); // 1
+      this.sortOrders[key] = this.sortOrders[key] * -1;
+      console.log(this.sortOrders[key]); // -1
+    }
+  },
+  computed: {
+    filterI: function filterI() {
+      var _this = this;
+
+      return this.canvasData.filter(function (item) {
+        return item.name.match(_this.filterKey);
+      });
+    }
+
+  }
+  // mounted() {
+  //     $.getJSON('/api/book/getJson',function (data) {
+  //       $.each(data,function (key,val) {
+  //         this.item[key]=key;
+  //         this.item[val]=val; 
+
+  //       })
+  //     });
+  //   }
+
+});
+
+// Vue.component('',{
+//   template:'#filterTest',
+//  data:{
+//     'keywords':[{"id":"9","name":"missy","phone":"21324234532"},   
+//     {"id":"3","name":"Mahama","phone":"345604542"},
+//     {"id":"2","name":"Bernard","phone":"241242542"}],
+
+//     canvasData:{"空间":34,"微博":30,"指导":29,"小明":28 , "图书馆": 27 , "PHP":26 , "项目" :25 ,"健康":24 , "JS" :23 ,'html' :22,'各镇': 22 ,'勋章' :21 ,'信息':20,'开发':19 , '设计':18 , '开幕式' :17 , '浏览器' :16 ,'身份':15,'图片': 14 , '中国' :13 , '伟大' :12 ,'地方':11 ,'噩梦' :10 ,'回复' :9 ,'空间' :8 , '请问' : 7 , '类库' : 6 , '激活' : 5 ,'规范' :4 ,'微软' :3 , '分割': 2 , '不错' :1 , '多个' :1, '斯蒂芬' :1, '分割' :1, '回过头' :1, '慈悲' :1, 'svg' :1, '三个' :1, '十多个' :1, '语句' :1, '写错' :1, '别冲动' :1, '请问' :1, '细长的' :1, '风光' :1, '梵蒂冈' :1, '成办' :1, '这些' :1, '是的' :1, '风格化' :1, '儿童歌' :1, '所得税' :1, '阿斯顿' :1, '斯蒂芬' :1, '电饭锅' :1, '很规范' :1, '车秩序' :1, '上网' :1, '过负荷' :1, '放到' :1, '电饭锅' :1, '东方红' :1, '风格化' :1, '请问' :1, '人头' :1, '让他' :1, '分隔' :1, '大概' :1, '福利' :1, '激活' :1, '断食' :1, '风格' :1, '瓦尔特' :1, '对方' :1,  '请问' :1, '而' :1, '人头' :1, '统一' :1, '一份' :1, '放到' :1, '放到' :1, '放到' :1, '放到' :1, '上网' :1, '我是' :1, '的' :1, '耳朵' :1, '发热' :1, '乳房' :1, '跟他' :1, '通过' :1, '还好用' :1, '雅黑' :1, '聚聚' :1, '看过' :1, '似的' :1, '独' :1, '明年' :1, '手头紧' :1, '换个' :1, '数据' :1, '导入' :1, '回归' :1},
+//     gridColumns:['id','name','phone'],
+//     searchQuery:''
+//   },
+// });
+
+new Vue({
+  el: '#filterTest',
+  data: {
+    'keywords': [{ "id": "9", "name": "missy", "phone": "21324234532" }, { "id": "3", "name": "Mahama", "phone": "345604542" }, { "id": "2", "name": "Bernard", "phone": "241242542" }],
+
+    canvasData: (_canvasData = { "空间": 34, "微博": 30, "指导": 29, "小明": 28, "图书馆": 27, "PHP": 26, "项目": 25, "健康": 24, "JS": 23, 'html': 22, '各镇': 22, '勋章': 21, '信息': 20, '开发': 19, '设计': 18, '开幕式': 17, '浏览器': 16, '身份': 15, '图片': 14, '中国': 13, '伟大': 12, '地方': 11, '噩梦': 10, '回复': 9 }, _defineProperty(_canvasData, '\u7A7A\u95F4', 8), _defineProperty(_canvasData, '请问', 7), _defineProperty(_canvasData, '类库', 6), _defineProperty(_canvasData, '激活', 5), _defineProperty(_canvasData, '规范', 4), _defineProperty(_canvasData, '微软', 3), _defineProperty(_canvasData, '分割', 2), _defineProperty(_canvasData, '不错', 1), _defineProperty(_canvasData, '多个', 1), _defineProperty(_canvasData, '斯蒂芬', 1), _defineProperty(_canvasData, '\u5206\u5272', 1), _defineProperty(_canvasData, '回过头', 1), _defineProperty(_canvasData, '慈悲', 1), _defineProperty(_canvasData, 'svg', 1), _defineProperty(_canvasData, '三个', 1), _defineProperty(_canvasData, '十多个', 1), _defineProperty(_canvasData, '语句', 1), _defineProperty(_canvasData, '写错', 1), _defineProperty(_canvasData, '别冲动', 1), _defineProperty(_canvasData, '\u8BF7\u95EE', 1), _defineProperty(_canvasData, '细长的', 1), _defineProperty(_canvasData, '风光', 1), _defineProperty(_canvasData, '梵蒂冈', 1), _defineProperty(_canvasData, '成办', 1), _defineProperty(_canvasData, '这些', 1), _defineProperty(_canvasData, '是的', 1), _defineProperty(_canvasData, '风格化', 1), _defineProperty(_canvasData, '儿童歌', 1), _defineProperty(_canvasData, '所得税', 1), _defineProperty(_canvasData, '阿斯顿', 1), _defineProperty(_canvasData, '\u65AF\u8482\u82AC', 1), _defineProperty(_canvasData, '电饭锅', 1), _defineProperty(_canvasData, '很规范', 1), _defineProperty(_canvasData, '车秩序', 1), _defineProperty(_canvasData, '上网', 1), _defineProperty(_canvasData, '过负荷', 1), _defineProperty(_canvasData, '放到', 1), _defineProperty(_canvasData, '\u7535\u996D\u9505', 1), _defineProperty(_canvasData, '东方红', 1), _defineProperty(_canvasData, '\u98CE\u683C\u5316', 1), _defineProperty(_canvasData, '\u8BF7\u95EE', 1), _defineProperty(_canvasData, '人头', 1), _defineProperty(_canvasData, '让他', 1), _defineProperty(_canvasData, '分隔', 1), _defineProperty(_canvasData, '大概', 1), _defineProperty(_canvasData, '福利', 1), _defineProperty(_canvasData, '\u6FC0\u6D3B', 1), _defineProperty(_canvasData, '断食', 1), _defineProperty(_canvasData, '风格', 1), _defineProperty(_canvasData, '瓦尔特', 1), _defineProperty(_canvasData, '对方', 1), _defineProperty(_canvasData, '\u8BF7\u95EE', 1), _defineProperty(_canvasData, '而', 1), _defineProperty(_canvasData, '\u4EBA\u5934', 1), _defineProperty(_canvasData, '统一', 1), _defineProperty(_canvasData, '一份', 1), _defineProperty(_canvasData, '\u653E\u5230', 1), _defineProperty(_canvasData, '\u653E\u5230', 1), _defineProperty(_canvasData, '\u653E\u5230', 1), _defineProperty(_canvasData, '\u653E\u5230', 1), _defineProperty(_canvasData, '\u4E0A\u7F51', 1), _defineProperty(_canvasData, '我是', 1), _defineProperty(_canvasData, '的', 1), _defineProperty(_canvasData, '耳朵', 1), _defineProperty(_canvasData, '发热', 1), _defineProperty(_canvasData, '乳房', 1), _defineProperty(_canvasData, '跟他', 1), _defineProperty(_canvasData, '通过', 1), _defineProperty(_canvasData, '还好用', 1), _defineProperty(_canvasData, '雅黑', 1), _defineProperty(_canvasData, '聚聚', 1), _defineProperty(_canvasData, '看过', 1), _defineProperty(_canvasData, '似的', 1), _defineProperty(_canvasData, '独', 1), _defineProperty(_canvasData, '明年', 1), _defineProperty(_canvasData, '手头紧', 1), _defineProperty(_canvasData, '换个', 1), _defineProperty(_canvasData, '数据', 1), _defineProperty(_canvasData, '导入', 1), _defineProperty(_canvasData, '回归', 1), _canvasData),
+    gridColumns: ['id', 'name', 'phone'],
+    searchQuery: ''
+  }
+});
+
+/***/ }),
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
 /* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        console.log('Component be mounted!');
+    },
+
+    props: {
+        books: Array,
+        auth: Object
+    }
+
+});
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(32)(
+  /* script */
+  __webpack_require__(48),
+  /* template */
+  __webpack_require__(52),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "D:\\CodeForFun\\Homestead\\Code\\library\\resources\\assets\\js\\components\\BookCard.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] BookCard.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3c2838fc", Component.options)
+  } else {
+    hotAPI.reload("data-v-3c2838fc", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 50 */,
+/* 51 */,
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -42021,40 +42050,12 @@ if (false) {
 }
 
 /***/ }),
-/* 49 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 50 */,
-/* 51 */
+/* 53 */,
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(10);
-module.exports = __webpack_require__(22);
+__webpack_require__(34);
+module.exports = __webpack_require__(47);
 
 
 /***/ })

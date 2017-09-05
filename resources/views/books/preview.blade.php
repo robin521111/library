@@ -11,13 +11,17 @@
   </div></el-col>
 </el-row>
 @endforeach
-
+<div class="container">
     @include('workshops.schedule')
+</div>
 </div>
 
 <script src="{{mix('js/vue.js')}}"></script>
 <script src="{{mix('js/app.js')}}"></script>
 
+<script src="{{mix('/js/vue.js')}}" ></script>
+<script src="{{mix('/js/app.js')}}" ></script>
+<script src="{{mix('/js/notify.js')}}" ></script>
 
 <script type="text/javascript">
 new Vue({

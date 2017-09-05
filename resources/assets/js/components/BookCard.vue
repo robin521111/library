@@ -36,8 +36,6 @@
             books: Array,
             auth: Object,
         }, 
-        data: function () {
-          return new Date()
-        }
+        
     }
 </script>

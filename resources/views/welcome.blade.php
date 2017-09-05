@@ -87,9 +87,9 @@
                 <div class="links">
                     <a href=" {{url('/workshop')}} ">Workshop Schedule</a>
                     <a href="{{url('/album')}}">Photo album</a>
-                    <a href="https://laravel-news.com">News</a>
+                    <a href="{{url('news')}}">News</a>
                     <a href=" {{url('/portal')}} ">Book</a>
-                    <a href="http://codexx.zrtec.net/Robin/Booklibery">Source Code</a>
+                    <a href="https://github.com/robin521111/library">Source Code</a>
                 </div>
             </div>
         </div>

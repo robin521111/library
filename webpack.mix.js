@@ -29,5 +29,5 @@ mix.js('node_modules/element-ui/lib/index.js','public/js/')
 //     'resources/assets/css/all.css',
 //     'resources/assets/css/style.css',
 // ], 'public/css/app.css')
-mix.js('resources/assets/js/canvasChat.js','public/js')
+mix.js('resources/assets/js/canvasChat.js','public/js/')
 mix.js('resources/assets/js/notify.js','public/js/')

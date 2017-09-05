@@ -15,12 +15,18 @@
     @include('workshops.schedule')
 </div>
 </div>
+<<<<<<< HEAD
 
 <script src="{{mix('js/vue.js')}}"></script>
 <script src="{{mix('js/app.js')}}"></script>
 
 <script src="{{mix('/js/vue.js')}}" ></script>
+=======
+<link rel="stylesheet" type="text/css" href="{{mix('/css/index.css')}}">
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 <script src="{{mix('/js/app.js')}}" ></script>
+<script src="{{mix('/js/vue.js')}}" ></script>
+<script src="{{mix('/js/index.js')}}" ></script>
 <script src="{{mix('/js/notify.js')}}" ></script>
 
 <script type="text/javascript">
@@ -50,6 +56,7 @@ new Vue({
     }
   }
 })
+
 </script>
 
 @endsection

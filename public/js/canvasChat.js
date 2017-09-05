@@ -63,12 +63,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
+<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 55);
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 56);
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 /******/ })
 /************************************************************************/
 /******/ ({
 
+<<<<<<< HEAD
 /***/ 35:
+=======
+/***/ 38:
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 /***/ (function(module, exports) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -438,10 +446,17 @@ function animate() {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 55:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(35);
+=======
+/***/ 56:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(38);
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 
 
 /***/ })

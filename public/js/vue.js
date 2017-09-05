@@ -63,7 +63,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
+<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 61);
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 62);
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -96,7 +100,11 @@ module.exports = g;
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 41:
+=======
+/***/ 44:
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -8972,10 +8980,17 @@ module.exports = g;
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 61:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(41);
+=======
+/***/ 62:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(44);
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 
 
 /***/ })

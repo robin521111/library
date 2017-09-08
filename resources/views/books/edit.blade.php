@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-
+<div class="container">
 {!!Form::model($book,array('route' => array('update', $book->id)))!!}
    <div class="form-group">
        {{ Form::label('book[title]','Book Title:') }}
@@ -28,6 +28,8 @@
    </div>
 
 {!! Form::close() !!}
+  
+</div>
 
 
 @stop

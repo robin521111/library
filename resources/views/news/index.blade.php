@@ -35,7 +35,7 @@
 				<template>
 					<el-carousel indicator-position="outside">
 						<el-carousel-item  v-for="item in 4" :key="item" >
-						<span class="span5">	<h3>@{{item}}      Blog Banner</h3></span>
+							<span class="span5">	<h3>@{{item}}      Blog Banner</h3></span>
 						</el-carousel-item>
 					</el-carousel>
 				</template>
@@ -55,6 +55,19 @@
 		</template>
 	</div>
 </div>
+
+
+<div id="notification">
+	
+	<template>
+		<el-button
+		plain
+		@click="open7">
+		偏移的消息
+	</el-button>
+</template>
+</div>
+
 
 </div>
 
@@ -100,5 +113,18 @@
 	new Vue({
 		el:'#carousel',
 	})
+
+	new Vue({
+		el:'#notification',
+		methods:{
+		open7:function (){
+			this.$notify.success({
+				title: '成功',
+				message: '这是一条成功的提示消息',
+				offset: 100
+			});
+			}
+		}
+	});
 </script>
 @endsection

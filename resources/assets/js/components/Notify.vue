@@ -8,6 +8,7 @@
 	export default {
 		methods: {
 			open7() {
+				console.log('clicked open7');
 				this.$notify.success({
 					title: '成功',
 					message: '这是一条成功的提示消息',
@@ -15,7 +16,7 @@
 				});
 			}
 		}
-		
+
 	}
 </script>
 

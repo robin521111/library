@@ -19,7 +19,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/portal', 'BookController@BookPre')->name('preview');
 Route::get('/submit', 'BookController@submit');
-Route::get('/books/edit/{idbooks}', 'BookController@edit');
+Route::get('/books/edit/{idbooks}', 'BookController@edit')->name('update');
 Route::get('/books/delete/{id}', 'BookController@delete')->name('delete');
 Route::match(['get', 'post'], 'album/post', 'AlbumController@uploadpic');
 Route::post('album/uploadpic','AlbumController@uploadpic');

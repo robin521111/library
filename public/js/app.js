@@ -22033,6 +22033,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	methods: {
 		open7: function open7() {
+			console.log('clicked open7');
 			this.$notify.success({
 				title: '成功',
 				message: '这是一条成功的提示消息',

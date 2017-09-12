@@ -42005,16 +42005,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component be mounted!');
-    },
+  mounted: function mounted() {
+    console.log('Component be mounted!');
+  },
 
-    props: {
-        books: Array,
-        auth: Object
-    }
+  props: {
+    books: Array,
+    auth: Object
+  }
 
 });
 
@@ -42071,7 +42072,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }), _vm._v(" "), _c('div', {
       staticClass: "caption"
-    }), _vm._v(" "), _c('h3', [_vm._v(_vm._s(book.title) + " ")]), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(0, true), _vm._v(" "), _c('p', [_c('a', {
+    }, [_c('h3', {
+      staticClass: "text-center"
+    }, [_vm._v(_vm._s(book.title) + " ")])]), _vm._v(" "), _c('br'), _vm._v(" "), _c('p', [_c('span', {
+      staticClass: "label label-primary"
+    }, [_vm._v(" " + _vm._s(book.tech_field) + " ")])]), _vm._v(" "), _vm._m(0, true), _vm._v(" "), _c('p', [_c('a', {
       staticClass: "btn btn-success",
       attrs: {
         "href": 'books/borrow/' + book.id
@@ -42088,9 +42093,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "href": 'books/delete/' + book.id,
         "role": "button"
       }
-    }, [_vm._v("Delete")])])]) : _vm._e(), _vm._v(" "), _c('p', [_c('span', {
-      staticClass: "label label-primary"
-    }, [_vm._v(" " + _vm._s(book.tech_field) + " ")])]), _vm._v(" "), _c('div', {
+    }, [_vm._v("Delete")])])]) : _vm._e(), _vm._v(" "), _c('div', {
       staticClass: "progress"
     }, [_c('div', {
       staticClass: "progress-bar progress-bar-striped active",
@@ -42103,11 +42106,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "aria-valuemin": "0",
         "aria-valuemax": "100"
       }
-    }, [_vm._v("\r\n  " + _vm._s(book.progress) + "%\r\n  ")])])])])
+    }, [_vm._v("\n          " + _vm._s(book.progress) + "%\n        ")])])])])
   }))
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_c('span', {
-    staticClass: "label label-primary"
+    staticClass: "label label-primary "
   })])
 }]}
 module.exports.render._withStripped = true

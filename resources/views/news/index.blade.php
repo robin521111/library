@@ -1,69 +1,94 @@
 @extends('layouts.app')
 @section('content')
-<div id="container">
-	<el-row :gutter="20">
-		<div id="navigation_panel">
-			<el-col :span="3">
-				<el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-					<el-submenu index="1">
-						<template slot="title"><i class="el-icon-message"></i>导航一</template>
-						<el-menu-item-group>
-							<template slot="title">分组一</template>
-							<el-menu-item index="1-1">选项1</el-menu-item>
-							<el-menu-item index="1-2">选项2</el-menu-item>
-						</el-menu-item-group>
-						<el-menu-item-group title="分组2">
-							<el-menu-item index="1-3">选项3</el-menu-item>
-						</el-menu-item-group>
-						<el-submenu index="1-4">
-							<template slot="title">选项4</template>
-							<el-menu-item index="1-4-1">选项1</el-menu-item>
-						</el-submenu>
-					</el-submenu>
-					<el-menu-item index="2"><i class="el-icon-menu"></i>导航二</el-menu-item>
-					<el-menu-item index="3"><i class="el-icon-setting"></i>导航三</el-menu-item>
-				</el-menu>
-			</el-col>
-			<el-col :span="8">
+<el-row :gutter="20" class="tac" id="navigation_panel">
+<el-col :span="8">
+    <h5>不带 icon</h5>
+    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark">
+      <el-submenu index="1">
+        <template slot="title">导航一</template>
+        <el-menu-item-group title="分组一">
+          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="1-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="1-3">选项3</el-menu-item>
+        </el-menu-item-group>
+        <el-submenu index="1-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="1-4-1">选项1</el-menu-item>
+        </el-submenu>
+      </el-submenu>
+      <el-menu-item index="2">导航二</el-menu-item>
+      <el-menu-item index="3">导航三</el-menu-item>
+    </el-menu>
+  </el-col>
+<el-col :span="16" id="carousel">
+	
+	<template>
+  <el-carousel indicator-position="outside">
+    <el-carousel-item v-for="item in 4" :key="item">
+     <span class="span5"> <h3>@{{ item }} Blog Banner</h3> </span> 
+    </el-carousel-item>
+  </el-carousel>
+</template>
+</el-col>
 
-			</el-col>
-		</div>
-	</div>
-	<el-col :span="18">
-		<div class="container">
-			<div id="carousel">
-				<template>
-					<el-carousel indicator-position="outside">
-						<el-carousel-item  v-for="item in 4" :key="item" >
-						<span class="span5">	<h3>@{{item}}      Blog Banner</h3></span>
-						</el-carousel-item>
-					</el-carousel>
-				</template>
-			</div>
-		</div>
-		<div id="rate">
-			<el-rate 
-				  v-model="value4"
-				  :icon-classes="['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3']"
-				  void-icon-class="icon-rate-face-off"
-				  :colors="['#99A9BF', '#F7BA2A', '#FF9900']" >
-			</el-rate>	
-		</div>
-		
-	</el-col >
 </el-row>
-<div class="container">
-	<div id="paging">
-		<template>
-			<div class="block" >
-				<span class="demonstration">调整每页显示条数</span>
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage2" :page-sizes="[100, 200, 300, 400]" :page-size="100" layout="sizes, prev, pager, next" :total="1000">
-				</el-pagination>
+
+  <el-row >
+		<el-col :span="6">
+			<div class="grid-content bg-purple">
+{{-- 				<div id="carousel">
+					<template>
+						<el-carousel indicator-position="outside">
+							<el-carousel-item  v-for="item in 4" :key="item" >
+							<span class="span5">	<h3>@{{item}}      Blog Banner</h3></span>
+						</el-carousel-item>
+						</el-carousel>
+					</template>
+				<p class="lead">
+					Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,
+								lorem quis bibendum auctor,nisi elit consequat ipsum,nec sagittis sem nibh id elit.Duis.
+
+				</p>
+				<br/>
+				<p class="lead">
+								Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin,
+										lorem quis bibendum auctor,nisi elit consequat ipsum,nec sagittis sem nibh id elit.Duis.
+										sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec teltus				
+				</p>
+				</div> --}}
+				<div id="tag" class="center-block" >
+					<el-tag>标签一</el-tag>
+					<el-tag type="gray">标签二</el-tag>
+					<el-tag type="primary">标签三</el-tag>
+					<el-tag type="success">标签四</el-tag>
+					<el-tag type="warning">标签五</el-tag>
+					<el-tag type="danger">标签六</el-tag>
+				</div>
 			</div>
-		</template>
+			<div class="container">
+				<div id="paging">
+					<template>
+						<div class="block" >
+							<span class="demonstration">调整每页显示条数</span>
+							<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage2" :page-sizes="[100, 200, 300, 400]" :page-size="100" layout="sizes, prev, pager, next" :total="1000">
+							</el-pagination>
+						</div>
+					</template>
+				</div>
+				<div id="rate">
+					<el-rate v-model="value3" show-text></el-rate>
+				</div>
+			</div>
+		</el-col >
 	</div>
-</div>
-</div>
+	
+
+</el-row>
+
+
+
 
 <link rel="stylesheet" type="text/css" href="{{mix('css/index.css')}}">
 <link rel="stylesheet" type="text/css" href="{{mix('css/app.css')}}">
@@ -107,13 +132,23 @@
 	new Vue({
 		el:'#carousel',
 	})
-	new Vue({
-		el:'#rate',
-		data:function () {
-			return {value4:null};
-		}
-	})
 
-	
+
+	var Main = {
+    	data() {
+	      return {
+	        value3: null
+	      }
+    }
+  }
+	var Ctor = Vue.extend(Main)
+	new Ctor().$mount('#rate')
+
+
+ new Vue({
+ 	el:'#tag',
+
+ })
+
 </script>
 @endsection

@@ -1,7 +1,10 @@
 @extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{mix('/css/index.css')}}">
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+<el-row :gutter="20">
+  <el-col :span="6"><div class="grid-content bg-purple">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -36,6 +39,13 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+  </div>
+  </el-col>
+
+</el-row>
+<el-row :gutter="20">
+<el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
 
 <div id="uploader" >
 <el-upload class="upload-demo" drag action="{{url('album/post')}}" multiple > 
@@ -45,6 +55,7 @@
 </el-upload>
 </div>
 
+
 <script src="{{mix('/js/vue.js')}}"></script>
 <script src="{{mix('/js/app.js')}}"></script>
 <script src="{{mix('/css/all.css')}}"></script>
@@ -52,8 +63,4 @@
 <script>
   new Vue().$mount('#uploader')
 </script>
-
-
-
-
 @endsection

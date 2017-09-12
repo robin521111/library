@@ -63,8 +63,9 @@
 									{{$book->tech_field}}
 								</td>
 								<td>
+
 									<div id="Workshop_item">
-										<notifycard></notifycard>
+									
 									</div>
 
 								</td>

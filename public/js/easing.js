@@ -63,20 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-<<<<<<< HEAD
-/******/ 	return __webpack_require__(__webpack_require__.s = 58);
-=======
 /******/ 	return __webpack_require__(__webpack_require__.s = 59);
->>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 /******/ })
 /************************************************************************/
 /******/ ({
 
-<<<<<<< HEAD
-/***/ 38:
-=======
 /***/ 41:
->>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 /***/ (function(module, exports) {
 
 /*
@@ -224,17 +216,10 @@ jQuery.extend(jQuery.easing, {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 58:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(38);
-=======
 /***/ 59:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(41);
->>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 
 
 /***/ })

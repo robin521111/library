@@ -63,9 +63,18 @@
 									{{$book->tech_field}}
 								</td>
 								<td>
+<<<<<<< HEAD
 
 									<div id="Workshop_item">
 									
+=======
+									<div id="notification">
+										<template>
+											<el-button plain  @click="open7">
+												偏移的消息
+											</el-button>
+										</template>
+>>>>>>> 90b9713215d27f5a93d16dec5cc4937da5780f2b
 									</div>
 
 								</td>
@@ -79,7 +88,6 @@
 
 			</div>
 			<div id="message">
-										
 
 			</div>
 
@@ -89,7 +97,18 @@
 			<script src="{{mix('js/index.js')}}"></script>
 			<script src="{{mix('js/vue.js')}}"></script>
 			<script>
-			new Vue({
-				el:"#Workshop_item"
-			})
+				
+			  new Vue({
+			    el:'#notification',
+			    methods:{
+			      open7:function (){
+			        this.$notify.success({
+			          title: '成功',
+			          message: '这是一条成功的提示消息',
+			          offset: 100
+			        });
+			      }
+			    }
+			  });
+
 			</script>

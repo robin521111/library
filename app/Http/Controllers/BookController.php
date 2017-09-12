@@ -4,7 +4,7 @@ namespace Library\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use Library\Models\BookModel;
+use Library\BookModel;
 
 class BookController extends Controller
 {
@@ -44,18 +44,14 @@ class BookController extends Controller
 
     public function edit(Request $request, $id)
     {
-
         $book = DB::table('books')->where('id','=',$id)
                                     ->first();
-                                    
         return view('books.edit',['book'=>$book]);
-
     }
 
     public function delete(Request $request,$id)
     {
         BookModel::destroy($id);
-
         return redirect('portal');
     }
 

@@ -41,6 +41,14 @@
 				</template>
 			</div>
 		</div>
+		<div id="rate">
+			<el-rate 
+				  v-model="value4"
+				  :icon-classes="['icon-rate-face-1', 'icon-rate-face-2', 'icon-rate-face-3']"
+				  void-icon-class="icon-rate-face-off"
+				  :colors="['#99A9BF', '#F7BA2A', '#FF9900']" >
+			</el-rate>	
+		</div>
 		
 	</el-col >
 </el-row>
@@ -55,6 +63,7 @@
 		</template>
 	</div>
 </div>
+<<<<<<< HEAD
 
 
 <div id="notification">
@@ -69,6 +78,8 @@
 </div>
 
 
+=======
+>>>>>>> dd55add1161e886ed8c764a32aed434940fd44dd
 </div>
 
 <link rel="stylesheet" type="text/css" href="{{mix('css/index.css')}}">
@@ -113,6 +124,7 @@
 	new Vue({
 		el:'#carousel',
 	})
+<<<<<<< HEAD
 
 	new Vue({
 		el:'#notification',
@@ -126,5 +138,15 @@
 			}
 		}
 	});
+=======
+	new Vue({
+		el:'#rate',
+		data:function () {
+			return {value4:null};
+		}
+	})
+
+	
+>>>>>>> dd55add1161e886ed8c764a32aed434940fd44dd
 </script>
 @endsection

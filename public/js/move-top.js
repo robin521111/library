@@ -63,12 +63,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
+<<<<<<< HEAD
+/******/ 	return __webpack_require__(__webpack_require__.s = 59);
+=======
 /******/ 	return __webpack_require__(__webpack_require__.s = 60);
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 /******/ })
 /************************************************************************/
 /******/ ({
 
+<<<<<<< HEAD
+/***/ 39:
+=======
 /***/ 42:
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 /***/ (function(module, exports) {
 
 /* UItoTop jQuery Plugin 1.2 | Matt Varone | http://www.mattvarone.com/web-design/uitotop-jquery-plugin */
@@ -94,10 +102,17 @@
 
 /***/ }),
 
+<<<<<<< HEAD
+/***/ 59:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(39);
+=======
 /***/ 60:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(42);
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 
 
 /***/ })

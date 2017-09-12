@@ -14,8 +14,19 @@
  <div class="container">
   @include('workshops.schedule')
 </div>
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+<script src="{{mix('js/vue.js')}}"></script>
+<script src="{{mix('js/app.js')}}"></script>
+
+<script src="{{mix('/js/vue.js')}}" ></script>
+=======
+>>>>>>> dd55add1161e886ed8c764a32aed434940fd44dd
 <link rel="stylesheet" type="text/css" href="{{mix('/css/index.css')}}">
+>>>>>>> 1a86cb642f1a526e7135eef3ee33fa2c126d8b19
 <script src="{{mix('/js/app.js')}}" ></script>
 <script src="{{mix('/js/vue.js')}}" ></script>
 <script src="{{mix('/js/index.js')}}" ></script>

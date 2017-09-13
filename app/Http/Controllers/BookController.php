@@ -5,6 +5,7 @@ namespace Library\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Library\BookModel;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -17,7 +18,7 @@ class BookController extends Controller
                                     ->take(100)
                                     ->get();
         $books['data'] = array('success','error','warning','info');
-        
+
         return view('books.preview',['books'=>$books['preview']],['data'=>$books['data']]);
     }
 

@@ -23,7 +23,7 @@ Route::get('/books/edit/{idbooks}', 'BookController@edit');
 Route::post('/books/update/{id}', 'BookController@update')->name('update');
 Route::get('/books/delete/{id}', 'BookController@delete')->name('delete');
 Route::match(['get', 'post'], 'album/post', 'AlbumController@uploadpic');
-Route::post('album/uploadpic','AlbumController@uploadpic');
+Route::post('album/post','AlbumController@uploadpic');
 Route::get('/album', 'AlbumController@index');
 Route::get('form','TestController@form');
 Route::post('form/validate','TestController@validate');
@@ -33,4 +33,5 @@ Route::get('/testPage', 'HomeController@testPage');
 Route::get('books/borrow/{idbooks?}', 'BookController@borrowBookById');
 Route::get('news','NewsController@index');
 Route::get('/home', 'HomeController@index')->name('home');
+
 

@@ -15,7 +15,10 @@ class AlbumController extends Controller
 
     public function uploadPic(Request $request)
     {
-    	if (!$request->hasFile('photo')) {
+    $directories = Storage::directories($directory);
+    dd($directories);
+
+    if (!$request->hasFile('photo')) {
             exit('上传文件为空！');
             // return response()->json([], 500, '无法获取上传文件');
         }
@@ -45,7 +48,7 @@ class AlbumController extends Controller
             return response()->json([], 500, '文件未通过验证');
         }
 
-    }
+   }
 
     
 }

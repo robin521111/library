@@ -28,14 +28,17 @@
 </template>
 
 <script>
-  export default {
-    mounted() {
-     console.log('Component be mounted!')
-   },
-   props:{
-    books: Array,
-    auth: Object,
-  }, 
+    export default {
+        mounted() {
+       console.log('Component be mounted!')
+        },
+        props:{
+            books: Array,
+            auth: Object,
+        }, 
+        
+    }
 
-}
+
+  
 </script>

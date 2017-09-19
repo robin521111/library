@@ -197,10 +197,7 @@
 
 
 </style>
-<<<<<<< HEAD
 
-=======
->>>>>>> dd55add1161e886ed8c764a32aed434940fd44dd
 <div class="container">
 
 	<div id="filterTest">

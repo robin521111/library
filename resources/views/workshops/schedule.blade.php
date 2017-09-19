@@ -63,6 +63,7 @@
 									{{$book->tech_field}}
 								</td>
 								<td>
+
 									<div id="notification">
 										<template>
 											<el-button plain  @click="open7">
@@ -79,10 +80,8 @@
 
 				</div>
 
-
 			</div>
 			<div id="message">
-
 			</div>
 
 			<link rel="stylesheet" type="text/css" href="{{mix('css/index.css')}}">

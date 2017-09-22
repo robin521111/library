@@ -15,13 +15,13 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="..." alt="...">
+      <img src="" alt="...">
       <div class="carousel-caption">
         ...
       </div>
     </div>
     <div class="item">
-      <img src="..." alt="...">
+      <img src="" alt="...">
       <div class="carousel-caption">
         ...
       </div>
@@ -48,11 +48,12 @@
 </el-row>
 
 <div id="uploader" >
-<el-upload class="upload-demo" drag action="{{url('album/post')}}"  :before-upload="beforePicUpload"> 
+<el-upload class="upload-demo" drag action="{{url('album/post')}}" :accept="accepts"  :before-upload="beforePicUpload" :auto_upload=true :http-request="upload" :on-success="handleSuccess"> 
   <i class="el-icon-upload" ></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
+ 
 </div>
 
 
@@ -68,6 +69,12 @@
     },
     methods:{
       beforePicUpload:function (file) {
+        
+      },
+      upload:function (file) {
+        
+      },
+      handleSuccess:function () {
         
       }
     }

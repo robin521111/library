@@ -15,14 +15,12 @@ class AlbumController extends Controller
 
     public function uploadPic(Request $request)
     {
-    $directories = Storage::directories($directory);
-    dd($directories);
-
-    if (!$request->hasFile('photo')) {
+        
+    if (!$request->hasFile('public')) {
             exit('上传文件为空！');
             // return response()->json([], 500, '无法获取上传文件');
         }
-        $file = $request->file('photo');
+        $file = $request->file('public');
         if(!$file->isValid()){
                 exit('文件上传出错！');
             }

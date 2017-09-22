@@ -22,7 +22,7 @@ Route::get('/submit', 'BookController@submit');
 Route::get('/books/edit/{idbooks}', 'BookController@edit');
 Route::post('/books/update/{id}', 'BookController@update')->name('update');
 Route::get('/books/delete/{id}', 'BookController@delete')->name('delete');
-Route::match(['get', 'post'], 'album/post', 'AlbumController@uploadpic');
+//Route::match(['get', 'post'], 'album/post', 'AlbumController@uploadpic');
 Route::post('album/post','AlbumController@uploadpic');
 Route::get('/album', 'AlbumController@index');
 Route::get('form','TestController@form');
